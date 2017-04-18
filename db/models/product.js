@@ -12,9 +12,18 @@ module.exports = db => db.define('products', {
   quantity: INTEGER,
   // Double check that this is a valid way of creating an array of SEQUELIZE.Strings
   category: ARRAY(STRING)
+}, {
+  scopes: {
+    populated: () => ({ // function form lets us refer to undefined models
+      include: [{
+        model: db.model('review')
+      }]
+    })
+  }
 })
 
-module.exports.associations = (Product, {User, Favorite, Order, OrderItem}) => {
+module.exports.associations = (Product, {User, Favorite, Order, OrderItem, Review}) => {
   Product.belongsToMany(User, {as: 'lovers', through: Favorite})
   Product.belongsToMany(Order, {through: OrderItem})
+  Product.hasMany(Review)
 }

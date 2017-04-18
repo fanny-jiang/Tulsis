@@ -8,6 +8,14 @@ module.exports = db => db.define('orders', {
     primaryKey: true
   },
   status: ENUM('Pending', 'Completed')
+}, {
+  scopes: {
+    populated: () => ({ // function form lets us refer to undefined models
+      include: [{
+        model: db.model('product')
+      }]
+    })
+  }
 })
 
 module.exports.associations = (Order, {Product, User, OrderItem}) => {
