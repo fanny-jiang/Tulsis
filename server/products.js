@@ -23,7 +23,8 @@ module.exports = require('express').Router()
       .catch(next))
   .get('/:id',
   (req, res, next) =>
-    Product.findById(req.params.id)
+    Product.scope('populated')
+      .findById(req.params.id)
       .then(product => res.json(product))
       .catch(next))
 
