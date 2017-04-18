@@ -36,7 +36,7 @@ module.exports = require('express').Router()
       returning: true
     })
       .then(response => response[1][0])
-      .then((actualResponse) => res.send(actualResponse))
+      .then((actualResponse) => res.json(actualResponse))
       .catch(next)
   )
 
