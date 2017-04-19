@@ -62,3 +62,7 @@ describe('User', () => {
 // get Orders by userId (Order.belongsToUser)
 // get Reviews by userId
 // get Reviews by productId
+
+
+// Tests
+// could add more tests once models have more methods
