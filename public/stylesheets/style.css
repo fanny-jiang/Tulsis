@@ -1,0 +1,26 @@
+html {
+    background-color: white; }
+
+a, span, h1, h2, h3, h4, h5, h6, div {
+    font-family: 'Helvetica';
+    color: black; }
+
+.small-font {
+    font-size: 0.5em; }
+
+.large-font {
+    font-size: 1.5em; }
+
+.navbar {
+    overflow: hidden; 
+    border-bottom-style: solid;
+    border-bottom-color: grey; 
+    border-bottom-width: 0.75px; }
+    .navbar a {
+        float: right;
+        display: block;
+        color: black;
+        padding: 12px 15px;
+        text-align: center; }
+    .navbar a:hover {
+        color: white; }
