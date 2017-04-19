@@ -2,6 +2,7 @@ const request = require('supertest')
   , { expect } = require('chai')
   , db = require('APP/db')
   , app = require('./start')
+  , Product = db.model('products')
 
 /* global describe it before afterEach */
 
@@ -10,70 +11,80 @@ describe('/api/products', () => {
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
   describe('GET /', () =>
-    describe('when there are no products', () =>
-      it('fails with a 403 (Not found)', () =>
+    describe('when there are or are not products', () =>
+      it('responds with a status of 200 with products or an empty set', () =>
         request(app)
           .get(`/api/products`)
-          .expect(403)
+          .expect(200)
       )))
 
-  describe('GET /:id', () =>
-    describe('when product does not exist', () =>
-      it('fails with a 403 (Not found)', () =>
+  describe('GET /:id', () => {
+    let id
+
+    before(() => {
+      return Product.create({
+        title: 'Test Shoes'
+      })
+        .then(product => {
+          // console.log('We made a product', product)
+          id = product.id
+        })
+      // .catch(console.error)
+    })
+
+    describe('when a product exists', () =>
+      it('it returns the product', () =>
         request(app)
-          .get(`/api/products/945`)
-          .expect(403)
-      )))
+          .get(`/api/products/${id}`)
+          .expect(200)
+          .then(res => {
+            // console.log("Here's our result", res.body)
+            expect(res.body.title).to.be.equal('Test Shoes')
+          })
+          .catch(console.error)
+      ))
+  })
 
   describe('POST', () =>
-    describe('only admin can add a product', () => {
-      it('creates a product', () =>
-        request(app)
-          .post('/api/products')
-          .send({
-            name: 'booties',
-            price: 12
-          })
-          .expect(201))
+    it('creates a product', () =>
+      request(app)
+        .post('/api/products')
+        .send({
+          title: 'booties',
+          price: 12
+        })
+        .expect(201)
+    ))
 
-      it('redirects to the product it just made', () =>
-        request(app)
-          .post('/api/products')
-          .send({
-            name: 'booties',
-            price: 12
-          })
-          .redirects(1)
-          .then(res => expect(res.body).to.contain({
-            name: 'booties',
-            price: 12
-          })))
-    }))
+  describe('PUT', () => {
+    let id
+    before(() => {
+      return Product.create({
+        title: 'booties',
+        price: 12
+      })
+        .then(product => {
+          // console.log('We made a product', product)
+          id = product.id
+        })
+      // .catch(console.error)
+    })
+    it('updates a product', () => {
+      request(app)
+        .put(`/api/products/${id}`)
+        .send({
+          title: 'new booties',
+          price: 24
+        })
+        .expect(200)
+        .then(res => {
+          expect(res.body.title).to.be.equal('new booties')
+        })
+    }
 
-  describe('PUT', () =>
-    describe('only admin can edit a product', () => {
-      it('updates a product', () =>
-        request(app)
-          .put('/api/products/1')
-          .send({
-            name: 'new booties',
-            price: 24
-          })
-          .expect(200))
-
-      it('redirects to the product it just made', () =>
-        request(app)
-          .put('/api/products/1')
-          .send({
-            name: 'new booties',
-            price: 24
-          })
-          .redirects(1)
-          .then(res => expect(res.body).to.contain({
-            name: 'new booties',
-            price: 24
-          })))
-    }))
+    )
+  }
+  )
 
   // describe('DELETE', () =>
   //   describe('only admin can delete a product', () => {
@@ -81,14 +92,14 @@ describe('/api/products', () => {
   //       request(app)
   //         .post('/api/products')
   //         .send({
-  //           name: 'deleteMe',
+  //           title: 'deleteMe',
   //           price: 500
   //         }))
   //     it('deletes a product', () =>
   //       request(app)
   //         .delete('/api/products')
   //         .send({
-  //           name: 'booties',
+  //           title: 'booties',
   //           price: 12
   //         })
   //         .expect(201))

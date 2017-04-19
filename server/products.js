@@ -23,12 +23,13 @@ module.exports = require('express').Router()
       .catch(next))
   .get('/:id',
   (req, res, next) =>
+
     Product.scope('populated')
       .findById(req.params.id)
       .then(product => res.json(product))
       .catch(next))
 
-  .put('/:id', (req, res, next) =>
+  .put('/:id', (req, res, next) => {
     Product.update(req.body, {
       where: {
         id: req.params.id
@@ -38,7 +39,7 @@ module.exports = require('express').Router()
       .then(response => response[1][0])
       .then((actualResponse) => res.json(actualResponse))
       .catch(next)
-  )
+  })
 
   .delete('/:id', (req, res, next) =>
     Product.destroy({
