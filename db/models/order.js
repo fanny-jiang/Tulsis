@@ -4,9 +4,6 @@ const {STRING, TEXT, INTEGER, ARRAY, ENUM} = require('sequelize')
 
 // this model refers to a cart of individual order items
 module.exports = db => db.define('orders', {
-  id: {type: INTEGER,
-    primaryKey: true
-  },
   status: ENUM('Pending', 'Completed')
 }, {
   scopes: {

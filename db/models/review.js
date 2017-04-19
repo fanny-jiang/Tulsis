@@ -1,7 +1,7 @@
-const {INTEGER, TEXT} = require('sequelize')
+const {TEXT, ENUM} = require('sequelize')
 
 module.exports = db => db.define('reviews', {
-  rating: INTEGER,
+  rating: ENUM('1', '2', '3', '4', '5'),
   content: TEXT,
 })
 

@@ -1,37 +1,94 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Promise} = db
+    , {User, Product, Favorite, Order, OrderItem, Review, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
-    things: things(),
+    products: products(),
   }
 
   seeded.favorites = favorites(seeded)
+  seeded.orders = orders(seeded)
+  seeded.orderItems = orderItems(seeded)
+  seeded.reviews = reviews(seeded)
 
   return Promise.props(seeded)
 }
 
 const users = seed(User, {
-  god: {
-    email: 'god@example.com',
-    name: 'So many names',
+  stef: {
+    email: 'stefanie@email.com',
+    name: 'Stefanie Sundby',
     password: '1234',
   },
-  barack: {
-    name: 'Barack Obama',
-    email: 'barack@example.gov',
+  maria: {
+    name: 'Maria Schreiber',
+    email: 'maria2@email.com',
+    password: '1234'
+  },
+  fanny: {
+    name: 'Fanny Jiang',
+    email: 'fanny@email.com',
+    password: '1234'
+  },
+  tina: {
+    name: 'Tina Heiligers',
+    email: 'tina@email.com',
+    password: '1234'
+  },
+  ben: {
+    name: 'Ben Cohen',
+    email: 'ben@email.com',
+    password: '1234'
+  },
+  ashi: {
+    name: 'Ashi Krishnan',
+    email: 'ashi@email.com',
+    password: '1234'
+  },
+  mariana: {
+    name: 'Mariana Templin',
+    email: 'mariana@email.com',
     password: '1234'
   },
 })
 
-const things = seed(Thing, {
-  surfing: {name: 'surfing'},
-  smiting: {name: 'smiting'},
-  puppies: {name: 'puppies'},
+const products = seed(Product, {
+  converse: {
+    title: 'converse',
+    description: 'tiny converse sneakers',
+    price: 30,
+    photoUrl: '/url/converse',
+    quantity: 50,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  booties: {
+    title: 'booties',
+    description: 'tiny bootie boots',
+    price: 25,
+    photoUrl: '/url/booties',
+    quantity: 100,
+    category: ['Infant', 'Newborn']
+  },
+  nikes: {
+    title: 'nikes',
+    description: 'tiny nike sneakers',
+    price: 15,
+    photoUrl: '/url/nikes',
+    quantity: 75,
+    category: ['Newborn', 'Toddler']
+  },
+  sandals: {
+    title: 'sandals',
+    description: 'tiny sandals for sunny days',
+    price: 10,
+    photoUrl: '/url/sandals',
+    quantity: 100,
+    category: ['Infant', 'Toddler']
+  }
 })
 
 const favorites = seed(Favorite,
@@ -42,30 +99,87 @@ const favorites = seed(Favorite,
   // This lets us reference previously-created rows in order to create the join
   // rows. We can reference them by the names we used above (which is why we used
   // Objects above, rather than just arrays).
-  ({users, things}) => ({
+  ({users, products}) => ({
     // The easiest way to seed associations seems to be to just create rows
     // in the join table.
-    'obama loves surfing': {
-      user_id: users.barack.id,    // users.barack is an instance of the User model
+    'mariana loves sandals': {
+      user_id: users.mariana.id,    // users.barack is an instance of the User model
                                    // that we created in the user seed above.
                                    // The seed function wires the promises so that it'll
                                    // have been created already.
-      thing_id: things.surfing.id  // Same thing for things.
+      product_id: products.sandals.id  // Same thing for products.
     },
-    'god is into smiting': {
-      user_id: users.god.id,
-      thing_id: things.smiting.id
+    'stef loves booties': {
+      user_id: users.stef.id,
+      product_id: products.booties.id
     },
-    'obama loves puppies': {
-      user_id: users.barack.id,
-      thing_id: things.puppies.id
+    'fanny loves nikes': {
+      user_id: users.fanny.id,
+      product_id: products.nikes.id
     },
-    'god loves puppies': {
-      user_id: users.god.id,
-      thing_id: things.puppies.id
+    'maria loves sandals': {
+      user_id: users.maria.id,
+      product_id: products.sandals.id
+    },
+    'tina loves converse': {
+      user_id: users.tina.id,
+      product_id: products.converse.id
+    },
+    'ashi loves booties': {
+      user_id: users.ashi.id,
+      product_id: products.booties.id
+    },
+    'ben loves nikes': {
+      user_id: users.ben.id,
+      product_id: products.nikes.id
     },
   })
 )
+
+const orders = seed(Order,
+  ({users}) => ({
+    'bens nike order': {
+      status: 'Pending',
+      user_id: users.ben.id
+    },
+    'ashis booties order': {
+      status: 'Completed',
+      user_id: users.ashi.id
+    }
+  })
+)
+
+const orderItems = seed(OrderItem,
+  ({products, orders}) => ({
+    'bens order nikes item': {
+      quantity: 1,
+      product_id: products.nikes.id,
+      order_id: orders['bens nike order'].id
+    },
+    'ashis order botties item': {
+      quantity: 2,
+      product_id: products.booties.id,
+      order_id: orders['ashis booties order'].id
+    }
+  })
+  )
+
+const reviews = seed(Review,
+  ({users, products}) => ({
+    'bens nikes review': {
+      rating: '4',
+      content: 'I love these but they\'re not good for interviews',
+      user_id: users.ben.id,
+      product_id: products.nikes.id
+    },
+    'stefs booties review': {
+      rating: '5',
+      content: 'These booties are so cute!',
+      user_id: users.stef.id,
+      product_id: products.booties.id
+    }
+  })
+  )
 
 if (module === require.main) {
   db.didSync
@@ -135,4 +249,4 @@ function seed(Model, rows) {
   }
 }
 
-module.exports = Object.assign(seed, {users, things, favorites})
+module.exports = Object.assign(seed, {users, products, favorites, orders, orderItems, reviews})
