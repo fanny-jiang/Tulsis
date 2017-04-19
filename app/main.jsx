@@ -6,12 +6,15 @@ import { connect, Provider } from 'react-redux'
 import axios from 'axios'
 
 import store from './store'
-import Jokes from './components/Jokes'
-import Login from './components/Login'
-import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Catalog from './components/Catalog'
-import Navbar from './components/Nav'
+import Navbar from './components/Navbar'
+import Admin from './components/Admin'
+import Cart from './components/Cart'
+import Checkout from './components/Checkout'
+import OrderHistory from './components/OrderHistory'
+import Product from './components/Product'
+import User from './components/User'
 
 import {receiveProducts} from './action-creators/products'
 import {receiveReviews} from './action-creators/reviews'
@@ -41,10 +44,7 @@ const App = connect(
 )(
   ({ user, children }) =>
     <div>
-      <nav>
-        {user ? <WhoAmI /> : <Login />}
-      </nav>
-      <Navbar />
+      <Navbar user={user} />
       {children}
     </div>
   )
@@ -53,7 +53,16 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="catalog" component={Catalog}/>
+        <Route path="catalog" component={Catalog}>
+          <Route path="/:productId" component={Product} />
+        </Route>
+        <Route path="cart" component={Cart}>
+          <Route path="/checkout" component={Checkout} />
+        </Route>
+        <Route path="user/:userId" component={User}>
+          <Route path="/orders" component={OrderHistory} />
+        </Route>
+        <Route path="admin/:userId" component={Admin} />
       </Route>
       <Route path='*' component={NotFound} />
     </Router>

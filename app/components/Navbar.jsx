@@ -2,8 +2,11 @@
 
 import React from 'react'
 import { Link } from 'react-router'
+import Login from './Login'
+import WhoAmI from './WhoAmI'
 
-export default function Navbar() {
+
+export default function Navbar(props) {
   return (
     <div>
         <div className="container-fluid">
@@ -12,8 +15,7 @@ export default function Navbar() {
             </div>
             <div>
                 <ul className="nav navbar-nav navbar-right">
-                    <li><Link to="/login">LOGIN</Link></li>
-                    <li><Link to="/signup">SIGNUP</Link></li>
+                    <li>{props.user ? <WhoAmI /> : <Login />}</li>
                     <li><Link to="/order">
                         <span className="glyphicon glyphicon-shopping-cart"></span>
                     </Link></li>
