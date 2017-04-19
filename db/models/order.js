@@ -8,11 +8,20 @@ module.exports = db => db.define('orders', {
     primaryKey: true
   },
   status: ENUM('Pending', 'Completed')
+}, {
+  scopes: {
+    populated: () => ({ // function form lets us refer to undefined models
+      include: [{
+        model: db.model('product')
+      }]
+    })
+  }
 })
 
-module.exports.associations = (Order, {User, OrderItem}) => {
+module.exports.associations = (Order, {Product, User, OrderItem}) => {
   // Order.hasMany(OrderItem, {through: RenameTable})
   Order.belongsTo(User)
+  Order.belongsToMany(Product, {through: OrderItem})
 }
 
   // Does sequelize store the previous values of an object?
