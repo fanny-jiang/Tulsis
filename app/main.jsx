@@ -35,10 +35,8 @@ const onAppEnter = () => {
     return res.map(r => r.data)
   })
   .then((res) => {
-    console.log('res', res)
     const products = res[0]
     const reviews = res[1]
-    // console.log('from main.jsx', products)
     store.dispatch(receiveProducts(products))
     store.dispatch(receiveReviews(reviews))
     // store.dispatch(receiveUsers(users))
