@@ -970,6 +970,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@3:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
 brace-expansion@^1.0.0:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
@@ -1115,6 +1119,16 @@ chai-enzyme@^0.5.2:
   dependencies:
     html "1.0.0"
     react-element-to-jsx-string "^3.0.0"
+
+chai-properties@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/chai-properties/-/chai-properties-1.2.1.tgz#44330f3149519307c783efd1ce4d909f38994461"
+  dependencies:
+    lodash "^3.1.0"
+
+chai-things@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/chai-things/-/chai-things-0.2.0.tgz#c55128378f9bb399e994f00052151984ed6ebe70"
 
 chai@^3.5.0:
   version "3.5.0"
@@ -3086,6 +3100,10 @@ lodash.some@^4.4.0:
 lodash@4.12.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.12.0.tgz#2bd6dc46a040f59e686c972ed21d93dc59053258"
+
+lodash@^3.1.0:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
 lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
   version "4.17.4"
