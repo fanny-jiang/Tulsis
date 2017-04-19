@@ -117,6 +117,7 @@ passport.use(new (require('passport-local').Strategy)(
   }
 ))
 
+// happens in app/store.jsx -- dispatches whoami immediately, hits this route
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:

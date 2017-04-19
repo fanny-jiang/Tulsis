@@ -11,12 +11,12 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Catalog from './components/Catalog'
+import Navbar from './components/Nav'
 
 import {receiveProducts} from './action-creators/products'
 import {receiveReviews} from './action-creators/reviews'
 import {receiveUsers} from './action-creators/users'
 import {receiveOrders} from './action-creators/orders'
-
 
 const onAppEnter = () => {
   const pProducts = axios.get('/api/products')
@@ -31,8 +31,8 @@ const onAppEnter = () => {
   .then(([products, reviews, users, orders]) => {
     store.dispatch(receiveProducts(products))
     store.dispatch(receiveReviews(reviews))
-    store.dispatch(receiveUsers(users))
-    store.dispatch(receiveOrders(orders))
+    // store.dispatch(receiveUsers(users))
+    // store.dispatch(receiveOrders(orders))
   })
 }
 
@@ -44,6 +44,7 @@ const App = connect(
       <nav>
         {user ? <WhoAmI /> : <Login />}
       </nav>
+      <Navbar />
       {children}
     </div>
   )
@@ -52,7 +53,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="/catalog" component={Catalog}/>
+        <Route path="catalog" component={Catalog}/>
       </Route>
       <Route path='*' component={NotFound} />
     </Router>
