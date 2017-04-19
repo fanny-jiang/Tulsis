@@ -47,7 +47,8 @@ module.exports = require('express').Router()
   .get('/:id',
   selfOnly,
   (req, res, next) =>
-    Order.findById(req.params.id)
+    Order.scope('populated')
+      .findById(req.params.id)
       .then(order => res.json(order))
       .catch(next))
 

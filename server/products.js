@@ -23,11 +23,10 @@ module.exports = require('express').Router()
       .catch(next))
   .get('/:id',
   (req, res, next) =>
-    Product.findById(req.params.id)
-      .then(product => {
-        res.json(product)
-      }
-      )
+
+    Product.scope('populated')
+      .findById(req.params.id)
+      .then(product => res.json(product))
       .catch(next))
 
   .put('/:id', (req, res, next) => {
@@ -37,12 +36,8 @@ module.exports = require('express').Router()
       },
       returning: true
     })
-      .then(response => {
-        return response[1][0]
-      })
-      .then((actualResponse) => {
-        res.send(actualResponse)
-      })
+      .then(response => response[1][0])
+      .then((actualResponse) => res.json(actualResponse))
       .catch(next)
   })
 
