@@ -7,14 +7,16 @@ import axios from 'axios'
 
 import store from './store'
 import NotFound from './components/NotFound'
-import CatalogContainer from './containers/CatalogContainer'
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-// import OrderHistory from './components/OrderHistory'
+import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
+
+import CartContainer from './containers/CartContainer'
+import CatalogContainer from './containers/CatalogContainer'
 
 import { receiveProducts } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
@@ -25,8 +27,8 @@ import { receiveCart } from './action-creators/carts'
 
 const get = (url, action) =>
   axios.get(url)
-  .then(res => res.data)
-  .then(data => store.dispatch(action(data)))
+    .then(res => res.data)
+    .then(data => store.dispatch(action(data)))
 
 const onAppEnter = () => {
   get('/api/products', receiveProducts)
@@ -34,14 +36,14 @@ const onAppEnter = () => {
   get('/api/cart', receiveCart)
 }
 
-const onUserLogin = () => {
-  const pCart = axios.get('/api/cart')
-    .then(res => {
-      const cart = res
-      store.dispatch(receiveCart(cart))
-    })
-    .catch()
-}
+// const onUserLogin = () => {
+//   const pCart = axios.get('/api/cart')
+//     .then(res => {
+//       const cart = res
+//       store.dispatch(receiveCart(cart))
+//     })
+//     .catch()
+// }
 
 const App = connect(
   ({ auth }) => ({ user: auth })
@@ -57,11 +59,11 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
+        <Route path="cart" component={CartContainer} >
+          <Route path="/checkout" component={Checkout} />
+        </Route>
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
-        </Route>
-        <Route path="cart" component={Cart} onUserLogin={onUserLogin}>
-          <Route path="/checkout" component={Checkout} />
         </Route>
         <Route path="user/:userId" component={User}>
           <Route path="/orders" component={OrderHistory} />

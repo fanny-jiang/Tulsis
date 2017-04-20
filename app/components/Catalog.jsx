@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 
 export default function Catalog(props) {
   const products = props.products
-  console.log('props', props)
   return (
     <div>
       <h3> CATALOG!!! </h3>
