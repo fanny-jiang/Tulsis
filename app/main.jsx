@@ -16,10 +16,11 @@ import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
 
-import {receiveProducts} from './action-creators/products'
-import {receiveReviews} from './action-creators/reviews'
-import {receiveUsers} from './action-creators/users'
-import {receiveOrders} from './action-creators/orders'
+import { receiveProducts } from './action-creators/products'
+import { receiveReviews } from './action-creators/reviews'
+import { receiveUsers } from './action-creators/users'
+import { receiveOrders } from './action-creators/orders'
+import { receiveCart } from './action-creators/carts'
 
 const onAppEnter = () => {
   const pProducts = axios.get('/api/products')
@@ -30,18 +31,27 @@ const onAppEnter = () => {
   // console.log('from onAppEnter', pProducts)
 
   return Promise
-  .all([pProducts, pReviews, pUsers, pOrders])
-  .then(res => {
-    return res.map(r => r.data)
-  })
-  .then((res) => {
-    const products = res[0]
-    const reviews = res[1]
-    store.dispatch(receiveProducts(products))
-    store.dispatch(receiveReviews(reviews))
-    // store.dispatch(receiveUsers(users))
-    // store.dispatch(receiveOrders(orders))
-  })
+    .all([pProducts, pReviews, pUsers, pOrders])
+    .then(res => {
+      return res.map(r => r.data)
+    })
+    .then((res) => {
+      const products = res[0]
+      const reviews = res[1]
+      const users = res[2]
+      store.dispatch(receiveProducts(products))
+      store.dispatch(receiveReviews(reviews))
+      store.dispatch(receiveUsers(users))
+      // store.dispatch(receiveOrders(orders))
+    })
+}
+
+const onUserLogin = () => {
+  const pCart = axios.get('/api/cart')
+    .then(res => {
+      const cart = res
+      store.dispatch(receiveCart(cart))
+    })
 }
 
 const App = connect(
@@ -61,7 +71,7 @@ render(
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
         </Route>
-        <Route path="cart" component={Cart}>
+        <Route path="cart" component={Cart} onUserLogin={onUserLogin}>
           <Route path="/checkout" component={Checkout} />
         </Route>
         <Route path="user/:userId" component={User}>
