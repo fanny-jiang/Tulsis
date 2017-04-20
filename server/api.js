@@ -5,8 +5,6 @@ const api = module.exports = require('express').Router()
 const db = require('APP/db')
 const Order = db.model('orders')
 
-
-
 api.use((req, res, next) => {
   const user = req.user
   if (!user) {
@@ -20,7 +18,6 @@ api.use((req, res, next) => {
       .catch(next)
   }
 })
-
 
 api
   .get('/heartbeat', (req, res) => res.send({ ok: true }))
