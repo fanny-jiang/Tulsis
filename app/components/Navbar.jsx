@@ -19,18 +19,17 @@ export default function Navbar(props) {
                 <h1><Link className="navbar-brand" to="/home">TULSI'S BABY BOUTIQUE</Link></h1>
             </div>
             <div>
-
-            </div>
         </div>
-            <div className="container-fluid">
-                <ul className="nav justify-content-center">
-                    <li className="nav-item float_right"><Link to="/catalog" >All</Link></li>
-                    <li className="nav-item float_right"><Link to="/catalog/newborns">Newborns</Link></li>
-                    <li className="nav-item float_right"><Link to="/catalog/infants">Infants</Link></li>
-                    <li className="nav-item float_right"><Link to="/catalog/toddlers">Toddlers</Link></li>
+      </div>
+      <div className="container-fluid">
+        <ul className="nav justify-content-center">
+          <li className="nav-item float_right"><Link to="/catalog" >All</Link></li>
+          <li className="nav-item float_right"><Link to="/catalog/newborns">Newborns</Link></li>
+          <li className="nav-item float_right"><Link to="/catalog/infants">Infants</Link></li>
+          <li className="nav-item float_right"><Link to="/catalog/toddlers">Toddlers</Link></li>
 
-                </ul>
-            </div>
+        </ul>
+      </div>
     </div>
   )
 }
