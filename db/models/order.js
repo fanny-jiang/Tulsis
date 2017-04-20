@@ -22,3 +22,6 @@ module.exports.associations = (Order, {Product, User, OrderItem}) => {
 }
 
   // Does sequelize store the previous values of an object?
+
+
+// Add associations to paymentInfo model and address model

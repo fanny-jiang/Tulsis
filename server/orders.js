@@ -85,6 +85,15 @@ module.exports = require('express').Router()
     // })
        // )
 
+  // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
+  .put('/:orderId/buy',
+  (req, res, next) => {
+    Order.update({status: 'Completed', payment: req.body.payment, address: req.body.address},
+    {where: {id: req.params.orderId}}, 
+    { returning: true })
+    .catch(next)
+  })
+
   // DELETE route to remove an order
   .delete('/:id', (req, res, next) =>
     Order.destroy({
@@ -101,6 +110,7 @@ module.exports = require('express').Router()
       })
       .catch(next)
   )
+  
 
 // TODOS
 // GET
