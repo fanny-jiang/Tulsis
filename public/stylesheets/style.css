@@ -12,9 +12,9 @@ a, span, h1, h2, h3, h4, h5, h6, div {
     font-size: 1.5em; }
 
 .navbar {
-    overflow: hidden; 
+    overflow: hidden;
     border-bottom-style: solid;
-    border-bottom-color: grey; 
+    border-bottom-color: grey;
     border-bottom-width: 0.75px; }
     .navbar a {
         float: right;
@@ -24,3 +24,14 @@ a, span, h1, h2, h3, h4, h5, h6, div {
         text-align: center; }
     .navbar a:hover {
         color: white; }
+li {
+    list-style: none;
+}
+.float_right {
+    float: right;
+}
+.navbar-center {
+    float: left;
+    text-align: center;
+}
+
