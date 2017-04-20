@@ -12,7 +12,7 @@ import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-import OrderHistory from './components/OrderHistory'
+// import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
 
