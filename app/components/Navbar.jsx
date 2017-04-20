@@ -8,18 +8,17 @@ import WhoAmI from './WhoAmI'
 export default function Navbar(props) {
   return (
     <div>
-      <div className="container-fluid">
-        <div>
-          <ul className="nav navbar-nav navbar-right float_right">
-            <li>{props.user ? <WhoAmI /> : <Login />}</li>
-            <li><Link to="/order">
-              <span>Shopping Cart</span>
-            </Link></li>
-          </ul>
-          <h1><Link className="navbar-brand" to="/home">TULSI'S BABY BOUTIQUE</Link></h1>
-        </div>
-        <div>
-
+        <div className="container-fluid">
+            <div>
+            <ul className="nav navbar-nav navbar-right float_right">
+                    <li>{props.user ? <WhoAmI /> : <Login />}</li>
+                    <li><Link to="/order">
+                        <img src='../../public/images/cart_icon.png' />
+                    </Link></li>
+                </ul>
+                <h1><Link className="navbar-brand" to="/home">TULSI'S BABY BOUTIQUE</Link></h1>
+            </div>
+            <div>
         </div>
       </div>
       <div className="container-fluid">

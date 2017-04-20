@@ -10,12 +10,10 @@ const Product = db.model('products')
 api.use((req, res, next) => {
   const user = req.user
   if (!user) {
-    // console.log("Aint no carts here")
     next()
   } else {
     Order.scope('populated').findOne({where: { user_id: user.id, status: 'Pending' }})
       .then(cart => {
-        console.log("We found a cart!!!", cart)
         req.cart = cart
         next()
       })
