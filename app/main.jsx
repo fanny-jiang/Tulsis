@@ -41,7 +41,7 @@ const onAppEnter = () => {
       const users = res[2]
       store.dispatch(receiveProducts(products))
       store.dispatch(receiveReviews(reviews))
-      store.dispatch(receiveUsers(users))
+      // store.dispatch(receiveUsers(users))
       // store.dispatch(receiveOrders(orders))
     })
 }
@@ -52,6 +52,7 @@ const onUserLogin = () => {
       const cart = res
       store.dispatch(receiveCart(cart))
     })
+    .catch()
 }
 
 const App = connect(

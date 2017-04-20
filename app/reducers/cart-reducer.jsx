@@ -7,7 +7,7 @@ const initialCartState = {
 }
 
 export default (state = initialCartState, action) => {
-  const newState = Object.assign({}, state)
+  let newState = Object.assign({}, state)
 
   switch (action.type) {
     case RECEIVE_CART:
