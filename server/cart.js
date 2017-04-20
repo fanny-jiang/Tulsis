@@ -18,4 +18,5 @@ module.exports = require('express').Router()
     req.cart.addProduct(product)
     res.json(req.cart)
   })
+  // We don't know how to test this using postman or other methods
 
