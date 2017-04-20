@@ -1,7 +1,7 @@
 import { RECEIVE_CART, RECEIVE_CARTS, CHANGE_QUANTITY } from '../constants'
 
 const initialCartState = {
-  orderItems: []
+  cart: []
 }
 
 export default (state = initialCartState, action) => {
