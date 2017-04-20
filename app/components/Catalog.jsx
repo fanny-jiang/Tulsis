@@ -7,8 +7,9 @@ export default function Catalog(props) {
   console.log('props', props)
   return (
     <div>
-      <h3> CATALOG!!! </h3>
+      <h3> Check out what Tulsi's has for your baby's tootsies! </h3>
       <div>
+      
         {
           products && products.map(product => (
             <div className="col-xs-4" key={product.id}>
@@ -18,7 +19,8 @@ export default function Catalog(props) {
                   <h5>
                     <span>{product.title}</span>
                   </h5>
-                  <small>{product.price}</small>
+                  <small>Price: ${product.price}</small>
+                  <button> Add me to your cart! </button>
                 </div>
               </Link>
             </div>

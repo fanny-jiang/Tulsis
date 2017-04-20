@@ -13,7 +13,7 @@ export default function Navbar(props) {
             <ul className="nav navbar-nav navbar-right float_right">
                     <li>{props.user ? <WhoAmI /> : <Login />}</li>
                     <li><Link to="/order">
-                        <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        <img src='../../public/images/cart_icon.png' />
                     </Link></li>
                 </ul>
                 <h1><Link className="navbar-brand" to="/home">TULSI'S BABY BOUTIQUE</Link></h1>
