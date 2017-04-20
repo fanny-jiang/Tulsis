@@ -10,10 +10,12 @@ const Product = db.model('products')
 api.use((req, res, next) => {
   const user = req.user
   if (!user) {
+    console.log("Aint no carts here")
     next()
   } else {
-    Order.findOne({ where: { user_id: user.id, status: 'Pending' } })
+    Order.findOne({ where: { user_id: user.id, status: 'Pending' }, include: [Product] })
       .then(cart => {
+        console.log("We found a cart!!!", cart)
         req.cart = cart
         next()
       })
