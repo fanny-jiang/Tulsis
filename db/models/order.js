@@ -16,12 +16,12 @@ const Order = module.exports = db => db.define('orders', {
   }
 })
 
-module.exports.associations = (Order, {Product, User, OrderItem}) => {
-  // Order.hasMany(OrderItem, {through: RenameTable})
+module.exports.associations = (Order, {Product, User, OrderItem, Payment, Address}) => {
   Order.belongsTo(User)
   Order.belongsToMany(Product, {through: OrderItem})
+  Order.belongsTo(Payment)
+  Order.belongsTo(Address)
   Order.OrderItem = OrderItem
   Order.hasMany(OrderItem)
-}
 
-  // Does sequelize store the previous values of an object?
+}
