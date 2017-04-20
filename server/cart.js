@@ -21,17 +21,12 @@ module.exports = require('express').Router()
   .post('/:productId',
   (req, res, next) => {
     Product.findById(req.params.productId)
-    .then(product => req.cart.addProduct(product))
-    .then((cart) => {
-      OrderItem.update(
-        { quantity: req.body.quantity },
-        { where: { order_id: cart.id } },
-        { returning: true })
+    .then(product => {
+      req.cart.addProduct(product,
+      { quantity: req.body.quantity })
+      return req.cart
     })
-    .then(orderItem => res.send({
-      message: 'Item successfully added to cart',
-      item: orderItem[1][0]
-    }))
+    .then(order => res.send(order))
     .catch(next)
   })
 

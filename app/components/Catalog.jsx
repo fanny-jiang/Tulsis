@@ -13,16 +13,16 @@ export default function Catalog(props) {
         {
           products && products.map(product => (
             <div className="col-xs-4" key={product.id}>
-              <Link className="thumbnail" to={`catalog/:productId/${product.id}`}>
+              <Link className="thumbnail" to={`catalog/${product.id}`}>
                 <img src={product.photoUrl} />
                 <div className="caption">
                   <h5>
                     <span>{product.title}</span>
                   </h5>
                   <small>Price: ${product.price}</small>
-                  <button> Add me to your cart! </button>
                 </div>
               </Link>
+              <button onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
             </div>
           ))
         }
