@@ -7,7 +7,7 @@ import axios from 'axios'
 
 import store from './store'
 import NotFound from './components/NotFound'
-import Catalog from './components/Catalog'
+import CatalogContainer from './containers/CatalogContainer'
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Cart from './components/Cart'
@@ -27,11 +27,16 @@ const onAppEnter = () => {
   const pUsers = axios.get('api/users')
   const pOrders = axios.get('api/orders')
   // Maybe add something for orderItems
+  // console.log('from onAppEnter', pProducts)
 
   return Promise
   .all([pProducts, pReviews, pUsers, pOrders])
-  .then(res => res.map(r => r.data))
-  .then(([products, reviews, users, orders]) => {
+  .then(res => {
+    return res.map(r => r.data)
+  })
+  .then((res) => {
+    const products = res[0]
+    const reviews = res[1]
     store.dispatch(receiveProducts(products))
     store.dispatch(receiveReviews(reviews))
     // store.dispatch(receiveUsers(users))
@@ -53,7 +58,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="catalog" component={Catalog}>
+        <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
         </Route>
         <Route path="cart" component={Cart}>
