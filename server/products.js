@@ -13,6 +13,7 @@ module.exports = require('express').Router()
     // If you want to only let admins list all the products, then you'll
     // have to add a role column to the users table to support
     // the concept of admin users.
+    // product.findall()
     Product.findAll()
       .then(products => res.json(products))
       .catch(next))

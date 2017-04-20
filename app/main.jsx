@@ -12,36 +12,35 @@ import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-import OrderHistory from './components/OrderHistory'
+// import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
 
-import {receiveProducts} from './action-creators/products'
-import {receiveReviews} from './action-creators/reviews'
-import {receiveUsers} from './action-creators/users'
-import {receiveOrders} from './action-creators/orders'
+import { receiveProducts } from './action-creators/products'
+import { receiveReviews } from './action-creators/reviews'
+import { receiveUsers } from './action-creators/users'
+import { receiveOrders } from './action-creators/orders'
+import { receiveCart } from './action-creators/carts'
+
+
+const get = (url, action) =>
+  axios.get(url)
+  .then(res => res.data)
+  .then(data => store.dispatch(action(data)))
 
 const onAppEnter = () => {
-  const pProducts = axios.get('/api/products')
-  const pReviews = axios.get('/api/reviews')
-  const pUsers = axios.get('api/users')
-  const pOrders = axios.get('api/orders')
-  // Maybe add something for orderItems
-  // console.log('from onAppEnter', pProducts)
+  get('/api/products', receiveProducts)
+  get('/api/reviews', receiveReviews)
+  get('/api/cart', receiveCart)
+}
 
-  return Promise
-  .all([pProducts, pReviews, pUsers, pOrders])
-  .then(res => {
-    return res.map(r => r.data)
-  })
-  .then((res) => {
-    const products = res[0]
-    const reviews = res[1]
-    store.dispatch(receiveProducts(products))
-    store.dispatch(receiveReviews(reviews))
-    // store.dispatch(receiveUsers(users))
-    // store.dispatch(receiveOrders(orders))
-  })
+const onUserLogin = () => {
+  const pCart = axios.get('/api/cart')
+    .then(res => {
+      const cart = res
+      store.dispatch(receiveCart(cart))
+    })
+    .catch()
 }
 
 const App = connect(
@@ -61,7 +60,7 @@ render(
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
         </Route>
-        <Route path="cart" component={Cart}>
+        <Route path="cart" component={Cart} onUserLogin={onUserLogin}>
           <Route path="/checkout" component={Checkout} />
         </Route>
         <Route path="user/:userId" component={User}>
