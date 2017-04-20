@@ -12,7 +12,7 @@ import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
-import OrderHistory from './components/OrderHistory'
+// import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
 
@@ -22,28 +22,16 @@ import { receiveUsers } from './action-creators/users'
 import { receiveOrders } from './action-creators/orders'
 import { receiveCart } from './action-creators/carts'
 
-const onAppEnter = () => {
-  const pProducts = axios.get('/api/products')
-  const pReviews = axios.get('/api/reviews')
-  const pUsers = axios.get('api/users')
-  const pOrders = axios.get('api/orders')
-  // Maybe add something for orderItems
-  // console.log('from onAppEnter', pProducts)
 
-  return Promise
-    .all([pProducts, pReviews, pUsers, pOrders])
-    .then(res => {
-      return res.map(r => r.data)
-    })
-    .then((res) => {
-      const products = res[0]
-      const reviews = res[1]
-      const users = res[2]
-      store.dispatch(receiveProducts(products))
-      store.dispatch(receiveReviews(reviews))
-      // store.dispatch(receiveUsers(users))
-      // store.dispatch(receiveOrders(orders))
-    })
+const get = (url, action) =>
+  axios.get(url)
+  .then(res => res.data)
+  .then(data => store.dispatch(action(data)))
+
+const onAppEnter = () => {
+  get('/api/products', receiveProducts)
+  get('/api/reviews', receiveReviews)
+  get('/api/cart', receiveCart)
 }
 
 const onUserLogin = () => {

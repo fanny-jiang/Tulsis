@@ -12,7 +12,7 @@ api.use((req, res, next) => {
   if (!user) {
     next()
   } else {
-    Order.findOne({ where: { user_id: user.id, status: 'Pending' }, include: [Product] })
+    Order.scope('populated').findOne({where: { user_id: user.id, status: 'Pending' }})
       .then(cart => {
         req.cart = cart
         next()
