@@ -88,9 +88,13 @@ module.exports = require('express').Router()
   // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
   .put('/:orderId/buy',
   (req, res, next) => {
-    Order.update({status: 'Completed', payment: req.body.payment, address: req.body.address},
+    Order.update({status: 'Completed'},
     {where: {id: req.params.orderId}}, 
     { returning: true })
+    .then(order => {
+      order[1][0].setPayment(req.body.payment)
+      order[1][0].setAddress(req.body.address)
+    })
     .catch(next)
   })
 
