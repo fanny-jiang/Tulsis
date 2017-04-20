@@ -4,6 +4,8 @@ const api = module.exports = require('express').Router()
 
 const db = require('APP/db')
 const Order = db.model('orders')
+const OrderItem = db.model('orderItems')
+const Product = db.model('products')
 
 api.use((req, res, next) => {
   const user = req.user
