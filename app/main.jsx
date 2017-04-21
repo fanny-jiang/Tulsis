@@ -51,9 +51,8 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="cart" component={CartContainer} >
-          <Route path="/checkout" component={ShippingPaymentFormContainer} />
-        </Route>
+        <Route path="cart" component={CartContainer} />
+        <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
         </Route>

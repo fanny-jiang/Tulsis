@@ -52,6 +52,21 @@ module.exports = require('express').Router()
       .then(order => res.json(order))
       .catch(next))
 
+  // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
+  .put('/:orderId/buy',
+  (req, res, next) => {
+    Order.update({ status: 'Completed' },
+      { where: { id: req.params.orderId } },
+      { returning: true })
+      .then(order => {
+        console.log('order.js', order)
+        // order[1][0].setPayment(req.body.payment)
+        order[1][0].setAddress(req.body.address)
+      .then((order) => res.sendStatus(204))
+      })
+      .catch(next)
+  })
+
   // PUT route to update an order from the request body
   .put('/:id',
   (req, res, next) =>
@@ -74,29 +89,17 @@ module.exports = require('express').Router()
       })
       .catch(next)
   )
-    // PUT route to add an order item to an order from the request body
+  // PUT route to add an order item to an order from the request body
   // .put('/:id/items/:itemId',
   // (req, res, next) =>
-    // OrderItem.create({
-      //get the product id
-      //get product quantity  from req.body
-      //create an orderItem
-      //current problem is we have an order_item_id on the product table - we want this in a separate table
-    // })
-       // )
+  // OrderItem.create({
+  //get the product id
+  //get product quantity  from req.body
+  //create an orderItem
+  //current problem is we have an order_item_id on the product table - we want this in a separate table
+  // })
+  // )
 
-  // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
-  .put('/:orderId/buy',
-  (req, res, next) => {
-    Order.update({status: 'Completed'},
-    {where: {id: req.params.orderId}}, 
-    { returning: true })
-    .then(order => {
-      order[1][0].setPayment(req.body.payment)
-      order[1][0].setAddress(req.body.address)
-    })
-    .catch(next)
-  })
 
   // DELETE route to remove an order
   .delete('/:id', (req, res, next) =>
@@ -114,7 +117,7 @@ module.exports = require('express').Router()
       })
       .catch(next)
   )
-  
+
 
 // TODOS
 // GET
