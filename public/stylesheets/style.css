@@ -45,3 +45,19 @@ li {
     text-align: center;
 }
 
+button {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+input {
+  line-height: normal;
+}
+
+fieldset {
+  padding: .35em .625em .75em;
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
+}
+
