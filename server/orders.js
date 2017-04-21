@@ -2,6 +2,7 @@
 
 const db = require('APP/db')
 const Order = db.model('orders')
+const Address = db.model('addresses')
 const OrderItem = db.model('orderItems')
 const User = db.model('users') // for orders by a user
 const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
@@ -55,15 +56,22 @@ module.exports = require('express').Router()
   // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
   .put('/:orderId/buy',
   (req, res, next) => {
-    Order.update({ status: 'Completed' },
+    Address.findOrCreate({
+      where: {
+        street: req.body.address.street
+      },
+      defaults: {
+        address: req.body.address
+      }
+    })
+    .then(returnVal => {
+      console.log("IN PUT ROUTE FOR ORDER: ", returnVal)
+      const address = returnVal[0]
+      Order.update({ status: 'Completed', address_id: address.id },
       { where: { id: req.params.orderId } },
       { returning: true })
-      .then(order => {
-        console.log('order.js', order)
-        // order[1][0].setPayment(req.body.payment)
-        order[1][0].setAddress(req.body.address)
-      .then((order) => res.sendStatus(204))
-      })
+      .then(() => res.sendStatus(204))
+    })
       .catch(next)
   })
 
