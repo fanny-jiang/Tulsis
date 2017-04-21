@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 export default function ShippingPaymentForm(props) {
   const handleChange = props.handleChange
   const handleSubmit = props.handleSubmit
-  // const inputValue = props.inputValue
-
 
   return (
     <div>

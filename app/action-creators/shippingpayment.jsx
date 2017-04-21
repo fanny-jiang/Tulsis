@@ -6,21 +6,17 @@ import axios from 'axios'
 export const addNewSPInfo = state =>
   axios.put(`/api/orders/${state.orderId}/buy`, {
     payment: {
-      state.paymentName,
-      state.ccnumber,
-      state.cctype,
-      state.cvc,
-      state.expiry
+      paymentName: state.paymentName,
+      ccnumber: state.ccnumber,
+      cctype: state.cctype,
+      cvc: state.cvc,
+      expiry: state.expiry
     },
     address: {
-      state.shippingName
-      state.street
-      state.city
-      state.zip
-      state.state
+      shippingName: state.shippingName,
+      street: state.street,
+      city: state.city,
+      zip: state.zip,
+      state: state.state,
     }
-  }
-})
-  .catch(console.error)
-  })
-
+  }).catch(console.error)

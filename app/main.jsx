@@ -17,6 +17,7 @@ import User from './components/User'
 
 import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
+import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
 
 import { receiveProducts } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
@@ -36,15 +37,6 @@ const onAppEnter = () => {
   get('/api/cart', receiveCart)
 }
 
-// const onUserLogin = () => {
-//   const pCart = axios.get('/api/cart')
-//     .then(res => {
-//       const cart = res
-//       store.dispatch(receiveCart(cart))
-//     })
-//     .catch()
-// }
-
 const App = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -60,7 +52,7 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
         <Route path="cart" component={CartContainer} >
-          <Route path="/checkout" component={Checkout} />
+          <Route path="/checkout" component={ShippingPaymentFormContainer} />
         </Route>
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />

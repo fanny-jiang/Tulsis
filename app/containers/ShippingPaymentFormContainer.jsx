@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ShippingPaymentForm from ' ../components/ShippingPaymentForm'
+import { ShippingPaymentForm } from ' ../components/ShippingPaymentForm'
 import React, {Component} from 'react'
 import { addNewSPInfo } from '../action-creators/shippingPayment'
 
