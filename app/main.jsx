@@ -14,6 +14,7 @@ import Checkout from './components/Checkout'
 import OrderHistory from './components/OrderHistory'
 import Product from './components/Product'
 import User from './components/User'
+import OrderConfirmation from './components/OrderConfirmation'
 
 import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
@@ -61,6 +62,7 @@ render(
       <Route path="/" component={App} onEnter={onAppEnter}>
         <Route path="cart" component={CartContainer} >
           <Route path="/checkout" component={Checkout} />
+          <Route path="/confirmation" component={OrderConfirmation} />
         </Route>
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={Product} />
