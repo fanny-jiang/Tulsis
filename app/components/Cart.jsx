@@ -32,6 +32,7 @@ export default function Cart(props) {
           ))
         }
       </div>
+      <button type="submit">Checkout</button>
     </div>
   )
 }
