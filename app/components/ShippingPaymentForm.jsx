@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default function ShippingPaymentForm(props) {
   const handleChange = props.handleChange
   const handleSubmit = props.handleSubmit
-  const inputValue = props.inputValue
+  // const inputValue = props.inputValue
 
 
   return (
@@ -17,7 +17,7 @@ export default function ShippingPaymentForm(props) {
                 name="paymentName"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -27,7 +27,7 @@ export default function ShippingPaymentForm(props) {
                 name="ccnumber"
                 type="number"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -37,7 +37,7 @@ export default function ShippingPaymentForm(props) {
                 name="cctype"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -47,7 +47,7 @@ export default function ShippingPaymentForm(props) {
                 name="cvc"
                 type="number"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -57,7 +57,7 @@ export default function ShippingPaymentForm(props) {
                 name="expiry"
                 type="date"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -70,7 +70,7 @@ export default function ShippingPaymentForm(props) {
                 name="shippingName"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -80,7 +80,7 @@ export default function ShippingPaymentForm(props) {
                 name="street"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -90,7 +90,7 @@ export default function ShippingPaymentForm(props) {
                 name="city"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div>
@@ -100,7 +100,7 @@ export default function ShippingPaymentForm(props) {
                 name="zip"
                 type="number"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div >
@@ -110,7 +110,7 @@ export default function ShippingPaymentForm(props) {
                 name="state"
                 type="text"
                 onChange={handleChange}
-                value={inputValue}
+                value=''
               />
             </label>
           </div >
