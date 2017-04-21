@@ -1,4 +1,4 @@
-import { RECEIVE_CART, RECEIVE_CARTS, CHANGE_QUANTITY } from '../constants'
+import { RECEIVE_CART } from '../constants'
 
 const initialCartState = {
   cart: []
