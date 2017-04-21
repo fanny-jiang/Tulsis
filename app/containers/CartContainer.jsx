@@ -2,9 +2,9 @@ import Cart from '../components/Cart'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
-  console.log('FROM CART CONTAINER: ', state)
+  console.log('cart container state', state)
   return {
-    cart: state.cart.cart
+    cart: state.cart.orderItems
   }
 }
 
