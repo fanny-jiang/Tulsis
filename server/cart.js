@@ -54,9 +54,4 @@ module.exports = require('express').Router()
     }))
     .catch(next)
   })
-
-  // so that order confirmation page shows up... this is necessary, right?
-  .get('/confirmation',
-  (req, res, next) => {
-    res.sendStatus(200)
-  })
+  
