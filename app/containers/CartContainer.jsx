@@ -12,3 +12,5 @@ const mapStateToProps = (state) => {
 const CartContainer = connect(mapStateToProps)(Cart)
 
 export default CartContainer
+
+
