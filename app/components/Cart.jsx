@@ -7,16 +7,28 @@ export default function Cart(props) {
   console.log('PROPS FROM CART: ', cart)
   return (
     <div>
-      <h3> CART!!! </h3>
+      <h3> Shopping Cart </h3>
       <div>
         {
           cart.map((orderItem) => (
-            <ul key={`orderItem.id`}>
-              <li><img src={`orderItem.product.photoUrl`}></img></li>
-              <li>{orderItem.product.title}</li>
-              <li>{orderItem.quantity}</li>
-              <li>{orderItem.product.price}</li>
-            </ul>
+            <div style={{
+              backgroundColor: 'lightgray',
+              padding: '15px',
+            }}
+            key={`orderItem.id`}>
+              <ul>
+              <li><img style={{
+                borderStyle: 'solid',
+                borderWidth: '1px',
+                height: '100px',
+                width: '100px'
+              }}
+              src={`orderItem.product.photoUrl`}></img></li>
+              <li><h3>{orderItem.product.title}</h3></li>
+              <li>Quantity: {orderItem.quantity}</li>
+              <li>Price: ${orderItem.product.price}.00</li>
+              </ul>
+            </div>
           ))
         }
       </div>
