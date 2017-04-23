@@ -1,3 +1,107 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    color: black;
+    background-color: white; }
+
+h1, h2, h3, h4 {
+    font-family: Avenir;
+    font-weight: bold; }
+
+.button {
+    background-color: lightcyan;
+    border: 0.25px solid black;
+    cursor: pointer;
+    display: inline;
+    padding: 3px 5px;
+    margin: 2px;
+    font-family: Avenir;
+    font-size: 0.5em;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* --------- WhoAmI --------- */
+.whoami-user-name {
+    color: black;
+    padding: 5px;
+    text-align: center;
+    font-size: 0.6em; 
+    text-decoration: none; }
+
+/* --------- NavBar --------- */
+.navbar-title {
+    font-family: Avenir; 
+    font-weight: bold;
+    font-size: 3em;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.1em;
+    padding: 10px; }
+
+.navbar-user-menu {
+    position: absolute;
+    margin: 10px auto;
+    right: 30px; 
+    text-align: right; }
+    .navbar-user-menu a {
+        display: inline;
+        color: black;
+        text-align: center;
+        padding: 5px;
+        font-size: 0.6em; 
+        text-decoration: none; }
+
+.navbar-bottom {
+    text-transform: uppercase; 
+    padding: 0px 0px 10px 0px;
+    margin: 0 auto;
+    border-bottom: 0.5px solid darkgrey; 
+    text-align: center; }
+    .navbar-bottom a {
+        display: inline;
+        font-family: Avenir;
+        color: black;
+        font-size: 0.75em;
+        text-align: center;
+        padding: 0px 15px 10px 15px;
+        text-decoration: none; }
+    .navbar-bottom a:hover {
+        color: #787887; }
+    .navbar-bottom a:active {
+        color: #42428a; }
+
+.icon {
+    height: 20px;
+    width: 20px; 
+    padding: 3px 5px; }
+
+
+/* --------- Catalog --------- */
+.catalog-item {
+    float: left;
+    padding: 10px;
+    margin: 20px 20px 50px 20px; }
+    .catalog-item a {
+        text-decoration: none; 
+        color: black; }
+    .catalog-item img {
+        border: 0.5px solid black;
+        height: 250px;
+        max-width: 250px; }
+    .catalog-item h4 {
+        font-family: Lato; 
+        font-weight: normal;
+        margin: 10px 0px 10px 0px; }
+    .catalog-item p {
+        font-size: 0.75em;
+        font-weight: bold; 
+        margin: 10px 0px 10px 0px; }
+
+
+
+
+/* 
 html {
     background-color: white; }
 
@@ -60,4 +164,5 @@ fieldset {
   margin: 0 2px;
   border: 1px solid #c0c0c0;
 }
+*/
 
