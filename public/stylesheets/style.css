@@ -7,37 +7,31 @@ h1, h2, h3, h4 {
     font-family: Avenir;
     font-weight: bold; }
 
-.button {
+button {
     background-color: lightcyan;
     border: 0.25px solid black;
     cursor: pointer;
-    display: inline;
-    padding: 3px 5px;
-    margin: 2px;
+    padding: 2px 5px;
+    margin: 2px 5px;
     font-family: Avenir;
     font-size: 0.5em;
     font-weight: 500;
     text-align: center;
-    text-transform: uppercase;
-}
-
-/* --------- WhoAmI --------- */
-.whoami-user-name {
-    color: black;
-    padding: 5px;
-    text-align: center;
-    font-size: 0.6em; 
-    text-decoration: none; }
+    text-transform: uppercase; }
 
 /* --------- NavBar --------- */
 .navbar-title {
-    font-family: Avenir; 
-    font-weight: bold;
-    font-size: 3em;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.1em;
     padding: 10px; }
+    .navbar-title a {
+        display: block;
+        color: black;
+        font-family: Avenir; 
+        font-weight: bold;
+        font-size: 3em;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none; }
 
 .navbar-user-menu {
     position: absolute;
@@ -45,7 +39,7 @@ h1, h2, h3, h4 {
     right: 30px; 
     text-align: right; }
     .navbar-user-menu a {
-        display: inline;
+        display: block;
         color: black;
         text-align: center;
         padding: 5px;
@@ -72,10 +66,26 @@ h1, h2, h3, h4 {
         color: #42428a; }
 
 .icon {
+    float: right;
     height: 20px;
-    width: 20px; 
-    padding: 3px 5px; }
+    width: 20px; }
 
+/* --------- WhoAmI --------- */
+.whoami-user-name {
+    color: black;
+    padding: 5px;
+    text-align: center;
+    font-size: 0.6em; 
+    text-decoration: none; }
+
+/* --------- Login --------- */
+.login {
+    display: block;
+    font-size: 9px;
+    padding: 1px 2px;
+    margin: 0px 5px;
+    border: 0.5px solid darkgrey;
+    width: 80px; }
 
 /* --------- Catalog --------- */
 .catalog-item {
@@ -97,72 +107,3 @@ h1, h2, h3, h4 {
         font-size: 0.75em;
         font-weight: bold; 
         margin: 10px 0px 10px 0px; }
-
-
-
-
-/* 
-html {
-    background-color: white; }
-
-a, span, h1, h2, h3, h4, h5, h6, div {
-    font-family: 'Helvetica';
-    color: black; }
-.checkout-button {
-  border-style: solid;
-  border-width: 1px;
-  padding: 10px;
-  border-color: darkgray;
-}
-
-.checkout-button-div {
-  padding: 40px;
-}
-
-.small-font {
-    font-size: 0.5em; }
-
-.large-font {
-    font-size: 1.5em; }
-
-.navbar {
-    overflow: hidden;
-    border-bottom-style: solid;
-    border-bottom-color: grey;
-    border-bottom-width: 0.75px; }
-    .navbar a {
-        float: right;
-        display: block;
-        color: black;
-        padding: 12px 15px;
-        text-align: center; }
-    .navbar a:hover {
-        color: white; }
-li {
-    list-style: none;
-}
-.float_right {
-    float: right;
-}
-.navbar-center {
-    float: left;
-    text-align: center;
-}
-
-button {
-  margin: 0;
-  font: inherit;
-  color: inherit;
-}
-
-input {
-  line-height: normal;
-}
-
-fieldset {
-  padding: .35em .625em .75em;
-  margin: 0 2px;
-  border: 1px solid #c0c0c0;
-}
-*/
-
