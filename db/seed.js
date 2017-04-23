@@ -56,36 +56,38 @@ const users = seed(User, {
   },
 })
 
+const placeholderUrl = 'http://nord.imgix.net/Zoom/0/_7493060.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60'
+
 const products = seed(Product, {
   converse: {
-    title: 'converse',
+    title: 'Converse',
     description: 'tiny converse sneakers',
     price: 30,
-    photoUrl: '/url/converse',
+    photoUrl: placeholderUrl,
     quantity: 50,
     category: ['Infant', 'Newborn', 'Toddler']
   },
   booties: {
-    title: 'booties',
+    title: 'Booties',
     description: 'tiny bootie boots',
     price: 25,
-    photoUrl: '/url/booties',
+    photoUrl: placeholderUrl,
     quantity: 100,
     category: ['Infant', 'Newborn']
   },
   nikes: {
-    title: 'nikes',
+    title: 'Nikes',
     description: 'tiny nike sneakers',
     price: 15,
-    photoUrl: '/url/nikes',
+    photoUrl: placeholderUrl,
     quantity: 75,
     category: ['Newborn', 'Toddler']
   },
   sandals: {
-    title: 'sandals',
+    title: 'Sandals',
     description: 'tiny sandals for sunny days',
     price: 10,
-    photoUrl: '/url/sandals',
+    photoUrl: placeholderUrl,
     quantity: 100,
     category: ['Infant', 'Toddler']
   }

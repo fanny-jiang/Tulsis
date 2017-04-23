@@ -4,28 +4,40 @@ import { Link } from 'react-router'
 
 export default function Catalog(props) {
   const products = props.products
+
   return (
     <div>
-      <h3> Check out what Tulsi's has for your baby's tootsies! </h3>
-      <div>
-      
-        {
-          products && products.map(product => (
-            <div className="col-xs-4" key={product.id}>
-              <Link className="thumbnail" to={`catalog/${product.id}`}>
-                <img src={product.photoUrl} />
-                <div className="caption">
-                  <h5>
-                    <span>{product.title}</span>
-                  </h5>
-                  <small>Price: ${product.price}</small>
-                </div>
-              </Link>
-              <button onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
-            </div>
-          ))
-        }
-      </div>
+      {/* Header */}
+      {/* for later -- should reflect selected category */}
+      <h3>Catalog</h3>
+
+      {/* Catalog items */ }
+      {/* for later -- responsive layout */}
+      { products && products.map(product => (
+          <div className="catalog-item" key={product.id}>
+            <Link to={`catalog/${product.id}`}>
+              <img className="catalog-item" src={product.photoUrl} />
+              <h4>{product.title}</h4>
+              <p>${product.price}.00</p>
+              {/* for later -- star rating */}
+            </Link>
+          </div>
+      ))}
     </div>
   )
 }
+
+/* PREVIOUS JSX
+
+<div>
+  <Link className="thumbnail" to={`catalog/${product.id}`}>
+    <img src={product.photoUrl} />
+    <div className="caption">
+      <h5>{product.title}</h5>
+      <small>Price: ${product.price}</small>
+    </div>
+  </Link>
+  <button onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
+</div>
+
+*/

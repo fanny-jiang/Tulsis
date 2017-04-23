@@ -91,19 +91,20 @@ button {
 .catalog-item {
     float: left;
     padding: 10px;
-    margin: 20px 20px 50px 20px; }
+    margin: 15px 30px; }
     .catalog-item a {
         text-decoration: none; 
         color: black; }
     .catalog-item img {
-        border: 0.5px solid black;
-        height: 250px;
-        max-width: 250px; }
+        border: 0.5px solid darkgrey;
+        height: 200px;
+        width: 200px; 
+        margin: 10px 0px 15px 0px; }
     .catalog-item h4 {
         font-family: Lato; 
         font-weight: normal;
-        margin: 10px 0px 10px 0px; }
+        margin: 5px 10px; }
     .catalog-item p {
         font-size: 0.75em;
         font-weight: bold; 
-        margin: 10px 0px 10px 0px; }
+        margin: 5px 10px; }
