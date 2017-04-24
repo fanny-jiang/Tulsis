@@ -19,8 +19,9 @@ import OrderConfirmation from './components/OrderConfirmation'
 import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
 import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
+import ProductContainer from './containers/ProductContainer'
 
-import { receiveProducts } from './action-creators/products'
+import { receiveProducts, getProductById } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
 import { receiveUsers } from './action-creators/users'
 import { receiveOrders } from './action-creators/orders'
@@ -36,6 +37,11 @@ const onAppEnter = () => {
   get('/api/products', receiveProducts)
   get('/api/reviews', receiveReviews)
   get('/api/cart', receiveCart)
+}
+
+const onProductEnter = function(nextRouterState) {
+  const productId = nextRouterState.params.productId
+  store.dispatch(getProductById(productId))
 }
 
 const App = connect(
@@ -55,9 +61,8 @@ render(
 
         <Route path="cart" component={CartContainer} />
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
-        <Route path="catalog" component={CatalogContainer}>
-          <Route path="/:productId" component={Product} />
-        </Route>
+        <Route path="catalog" component={CatalogContainer} />
+        <Route path="catalog/:productId" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="user/:userId" component={User}>
           <Route path="/orders" component={OrderHistory} />
         </Route>
