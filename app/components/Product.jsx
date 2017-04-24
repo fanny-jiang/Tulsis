@@ -31,3 +31,6 @@ export default function Product(props) {
   )
 
 }
+
+// TO DO
+// see action-creators/albums in juke to create an action-creator that takes makes an axios request to return a product by product id
