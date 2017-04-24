@@ -16,7 +16,11 @@ export default class Cart extends Component {
 
   orderTotal(cart) {
     var prices = []
-    cart.map(item => prices.push(item.product.price))
+    console.log('CART FROM PROPS', cart)
+    cart.map(item => {
+      prices.push(item.product.price * item.quantity)
+      console.log('PRICES: ', prices)
+    })
     return prices.reduce((a, b) => a + b, 0)
   }
 
@@ -79,7 +83,7 @@ export default class Cart extends Component {
             </table>
 
             <div className="item-price">
-              <p>${orderItem.product.price}.00</p>
+              <p>Unit Price: ${orderItem.product.price}.00</p>
             </div>
 
           </div>
