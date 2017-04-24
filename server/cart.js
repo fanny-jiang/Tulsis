@@ -54,4 +54,21 @@ module.exports = require('express').Router()
     }))
     .catch(next)
   })
-  
+
+// increments quantity of item by 1 (for '+' button in cart view)
+  .put('/:productId/add',
+  (req, res, next) => {
+    OrderItem.findOne({
+      where: { product_id: req.params.productId }
+    })
+    .then(item => {
+      item.update(
+        { quantity: item.quantity+1 },
+        { returning: true })
+      .then(item => res.send({
+        message: 'Quantity increased by 1',
+        item: item[1][0]
+      }))
+    })
+    .catch(next)
+  })

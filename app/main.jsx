@@ -18,7 +18,9 @@ import OrderConfirmation from './components/OrderConfirmation'
 
 import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
-import ProductContainer from './containers/ProductContainer'
+
+import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
+
 
 import { receiveProducts } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
@@ -38,15 +40,6 @@ const onAppEnter = () => {
   get('/api/cart', receiveCart)
 }
 
-// const onUserLogin = () => {
-//   const pCart = axios.get('/api/cart')
-//     .then(res => {
-//       const cart = res
-//       store.dispatch(receiveCart(cart))
-//     })
-//     .catch()
-// }
-
 const App = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -61,10 +54,9 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="cart" component={CartContainer} >
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/confirmation" component={OrderConfirmation} />
-        </Route>
+        <Route path="confirmation" component={OrderConfirmation}/>
+        <Route path="cart" component={CartContainer} />
+        <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
         <Route path="catalog" component={CatalogContainer}>
           <Route path="/:productId" component={ProductContainer} />
         </Route>

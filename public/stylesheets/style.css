@@ -1,47 +1,233 @@
-html {
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    color: black;
     background-color: white; }
 
-a, span, h1, h2, h3, h4, h5, h6, div {
-    font-family: 'Helvetica';
-    color: black; }
-.checkout-button {
-  border-style: solid;
-  border-width: 1px;
-  padding: 10px;
-  border-color: darkgray;
-}
+h1, h2, h3, h4 {
+    font-family: Avenir;
+    font-weight: bold; }
 
-.checkout-button-div {
-  padding: 40px;
-}
+button {
+    background-color: lightcyan;
+    border: 0.25px solid black;
+    cursor: pointer;
+    padding: 2px 5px;
+    margin: 2px 5px;
+    font-family: Avenir;
+    font-size: 0.5em;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase; }
 
-.small-font {
-    font-size: 0.5em; }
-
-.large-font {
-    font-size: 1.5em; }
-
-.navbar {
-    overflow: hidden;
-    border-bottom-style: solid;
-    border-bottom-color: grey;
-    border-bottom-width: 0.75px; }
-    .navbar a {
-        float: right;
+/* --------- NavBar --------- */
+.navbar-title {
+    padding: 10px; }
+    .navbar-title a {
         display: block;
         color: black;
-        padding: 12px 15px;
-        text-align: center; }
-    .navbar a:hover {
-        color: white; }
-li {
-    list-style: none;
-}
-.float_right {
-    float: right;
-}
-.navbar-center {
-    float: left;
-    text-align: center;
-}
+        font-family: Avenir; 
+        font-weight: bold;
+        font-size: 3em;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none; }
 
+.navbar-user-menu {
+    position: absolute;
+    margin: 10px auto;
+    right: 30px; 
+    text-align: right; }
+    .navbar-user-menu a {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 5px;
+        font-size: 0.6em; 
+        text-decoration: none; }
+
+.navbar-bottom {
+    text-transform: uppercase; 
+    padding: 0px 0px 10px 0px;
+    margin: 0 auto;
+    border-bottom: 0.5px solid darkgrey; 
+    text-align: center; }
+    .navbar-bottom a {
+        display: inline;
+        font-family: Avenir;
+        color: black;
+        font-size: 0.75em;
+        text-align: center;
+        padding: 0px 15px 10px 15px;
+        text-decoration: none; }
+    .navbar-bottom a:hover {
+        color: #787887; }
+    .navbar-bottom a:active {
+        font-weight: bold; }
+
+.icon {
+    float: right;
+    height: 20px;
+    width: 20px; }
+
+/* --------- WhoAmI --------- */
+.whoami-user-name {
+    color: black;
+    padding: 5px;
+    text-align: center;
+    font-size: 0.6em; 
+    text-decoration: none; }
+
+/* --------- Login --------- */
+.login {
+    display: block;
+    font-size: 9px;
+    padding: 1px 2px;
+    margin: 0px 5px;
+    border: 0.5px solid darkgrey;
+    width: 80px; }
+
+
+/* --------- Main View Frame --------- */
+.main-container {
+    margin: 30px 50px; }
+
+.page-header {
+    margin: 20px 0px 20px 30px; }
+
+.heading {
+    margin: 0px 0px 40px 30px; 
+    font-family: Avenir;
+    font-size: 0.9em; }
+
+/* --------- Catalog --------- */
+.catalog-item {
+    float: left;
+    margin: 15px 30px; }
+    .catalog-item a {
+        text-decoration: none; 
+        color: black; }
+    .catalog-item img {
+        border: 0.5px solid darkgrey;
+        height: 200px;
+        width: 200px; 
+        margin: 10px 0px 15px 0px; }
+    .catalog-item h4 {
+        font-family: Lato; 
+        font-weight: normal;
+        margin: 5px 10px; }
+    .catalog-item p {
+        font-size: 0.75em;
+        font-weight: bold; 
+        margin: 5px 10px; }
+
+/* --------- Cart --------- */
+.price-table {
+    display: block;
+    float: right; 
+    margin: 30px 50px 30px auto; }
+    .price-table td {
+        width: 150px;
+        font-family: Avenir;
+        font-size: 0.9em;
+        font-weight: bold;
+        text-align: right; }
+    .price-table .label {
+        font-size: 0.8em; }
+
+.checkout-btn {
+    display: block;
+    float: right;
+    margin: 30px 50px 0px 0px; }    
+    .checkout-btn input {
+        background: cyan;
+        border: 0.5px solid black;
+        padding: 5px 20px;
+        font-family: Avenir;
+        font-size: 1em;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none; }
+
+/* --------- Cart Items --------- */
+.item-container {
+    border: 0.5px solid lightgrey; 
+    background-color: lightcyan; 
+    padding: 10px; 
+    margin: 0px 30px; }
+.item-image {
+    display: inline-block;
+    height: 125px;
+    width: 125px; 
+    border: 0.25px solid lightgray; 
+    margin-right: 20px; }
+.item-info-table {
+    display: inline-block;
+    width: 70%;
+    text-align: left; 
+    vertical-align: top; }
+    .item-info-table td {
+        font-size: 0.75em; 
+        padding: 5px; }
+    .item-info-table a {
+        font-family: Avenir;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: black;
+        text-decoration: none; }
+.item-price {
+    display: inline-block;
+    width: 10%;
+    margin: 10px 5px; 
+    vertical-align: top; }
+    .item-price p {
+        font-family: Avenir;
+        font-size: 0.75em;
+        font-weight: bold;
+        text-align: right; }
+
+/* --------- Shipping & Payment Form --------- */
+
+.ship-pay-form {
+    margin: 0px 30px; }
+    .ship-pay-form fieldset {
+        border: 0.5px solid grey; 
+        padding: 20px; 
+        margin-bottom: 30px; }
+    .ship-pay-form legend {
+        font-size: 1em;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 10px; }
+    .payment label,
+    .shipping label {
+        float: left;
+        font-size: 0.9em; }
+    .payment label { 
+        width: 20%; }
+    .shipping label { 
+        width: 10%; }
+    .payment input,
+    .shipping input {
+        width: 25%; }
+
+.complete-order-btn {
+    display: block;
+    margin: 50px auto;
+    background-color: lightcoral;
+    border: 0.5px solid black;
+    padding: 5px 20px;
+    font-family: Avenir;
+    font-size: 1.2em;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none; }
+
+/* -------- Clearing our floats -------- */
+.clear {
+    clear: both; }

@@ -1,8 +1,9 @@
-import { RECEIVE_ORDERS } from '../constants'
+import { RECEIVE_ORDERS, CHECKOUT_ORDER } from '../constants'
 
 const initialOrderState = {
   selected: {},
-  orderList: []
+  orderList: [],
+  status: ''
 }
 
 export default function(state = initialOrderState, action) {
@@ -11,6 +12,9 @@ export default function(state = initialOrderState, action) {
   switch (action.type) {
   case RECEIVE_ORDERS:
     newState.orderList = action.orders
+    break
+  case CHECKOUT_ORDER:
+    newState.status = action.status
     break
   default:
     return state
