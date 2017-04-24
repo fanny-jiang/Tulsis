@@ -12,7 +12,7 @@ const loadCart = (req, res, next) => {
   if (!user) {
     next()
   } else {
-    return Order.scope('populated').findOne({where: { user_id: user.id, status: 'Pending' }})
+    return Order.scope('populated').findOne({ where: { user_id: user.id, status: 'Pending' } })
       .then(cart => {
         req.cart = cart
         next()
@@ -75,61 +75,54 @@ module.exports = require('express').Router()
   (req, res, next) => {
     OrderItem.findOne({
       where: { product_id: +req.params.productId },
-      include: [{model: Product}]
+      include: [{ model: Product }]
     })
       .then(item => {
         const productInventory = item.product.dataValues.quantity
         if (item.quantity >= productInventory) {
           return res.status(400).send('Out of stock')
         }
-        console.log('DID WE GET TO PRODUCT/ID/ADD', item)
         return item.update(
           { quantity: item.quantity + 1 },
           { returning: true })
-          // .then(item => {
-          //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
-          // })
+        // .then(item => {
+        //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
+        // })
       })
       .then(() => next())
       .catch(next)
   },
   loadCart, // reload it because it just changed
   (req, res, next) => {
-    console.log('CART: ', req.cart)
-          // .then(product => {
-          //   console.log('WHAT IS THIS: ', product)
-            res.send({
-              message: 'Quantity increased by 1',
-              cart: req.cart // need to refetch cart, might want to create fx that we can .then call fetch
-            })
-          // }).catch(next)
-      // })
-      // .catch(next)
+    res.send({
+      message: 'Quantity increased by 1',
+      cart: req.cart
+    })
   })
 
   // decrements quantity of item by 1 (for '-' button in cart view)
-    .put('/:productId/subtract',
+  .put('/:productId/subtract',
   (req, res, next) => {
     OrderItem.findOne({
       where: { product_id: +req.params.productId }
     })
       .then(item => {
         if (item.quantity < 1) {
-          res.status(400).send('Please add item to cart')
-        } else {
-          item.update(
+          return res.status(400).send('Please add item to cart')
+        }
+        return item.update(
           { quantity: item.quantity - 1 },
           { returning: true })
-          .then(item => {
-            res.send({
-              message: 'Quantity decreased by 1',
-              quantity: item.dataValues.quantity,
-              cart: req.cart
-            })
-          }).catch(next)
-        }
       })
+      .then(() => next())
       .catch(next)
+  },
+  loadCart,
+  (req, res, next) => {
+    res.send({
+      message: 'Quantity decreased by 1',
+      cart: req.cart
+    })
   })
 
   // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'
