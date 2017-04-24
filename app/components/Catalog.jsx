@@ -6,10 +6,10 @@ export default function Catalog(props) {
   const products = props.products
 
   return (
-    <div>
+    <div className="main-container">
       {/* Header */}
       {/* for later -- should reflect selected category */}
-      <h3>Catalog</h3>
+      <h3 className="page-header">Catalog</h3>
 
       {/* Catalog items */ }
       {/* for later -- responsive layout */}
