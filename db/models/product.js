@@ -1,6 +1,7 @@
 'use strict'
 
 const { STRING, TEXT, INTEGER, ARRAY } = require('sequelize')
+const Review = require('./review')
 
 module.exports = db => db.define('products', {
   title: {
@@ -26,7 +27,7 @@ module.exports = db => db.define('products', {
   scopes: {
     populated: () => ({ // function form lets us refer to undefined models
       include: [{
-        model: db.model('review')
+        model: Review
       }]
     })
   }
