@@ -1,25 +1,48 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { updateCart } from '../action-creators/carts'
+import store from '../store'
 
 
 export default class Cart extends Component {
   constructor(props) {
     super(props)
     this.orderTotal = this.orderTotal.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
+    this.handleSubtract = this.handleSubtract.bind(this)
   }
 
   orderTotal(cart) {
     var prices = []
-    cart.map(item => prices.push(item.product.price))
+    cart.map(item => {
+      prices.push(item.product.price * item.quantity)
+    })
     return prices.reduce((a, b) => a + b, 0)
   }
 
-  handleSubmit(evt) {
+  handleAdd(evt) {
     console.log('You hit the add button!')
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/add`)
+      .then(res => {
+        console.log('RES.DATA: ', res.data)
+        store.dispatch(updateCart(res.data.cart))
+      })
+      .catch(err => console.error('Cannot update quantity', err))
+  }
+
+  handleSubtract(evt) {
+    console.log('You hit the subtract button!')
+    evt.preventDefault()
+    axios.put(`/api/cart/${evt.target.value}/subtract`)
+      .then(res => {
+        // if (res.status === 400) {
+        //   window.alert('Can\'t have negative quantity!')
+        // }
+        store.dispatch(updateCart(res.data.cart))
+      })
       .catch(err => console.error('Cannot update quantity', err))
   }
 
@@ -50,7 +73,8 @@ export default class Cart extends Component {
                 <tr>
                   <td>Qty:</td>
                   <td>{orderItem.quantity}</td>
-                  <td><button type="submit" onSubmit={this.handleSubmit} value={orderItem.product.id}>+</button></td>
+                  <td><button type="submit" className="addSubtract" onClick={this.handleAdd} value={orderItem.product.id}>+</button>
+                    <button type="submit" className="addSubtract" onClick={this.handleSubtract} value={orderItem.product.id}>-</button></td>
                 </tr>
                 <tr colSpan="3">
                   <td>Remove</td>
@@ -59,7 +83,7 @@ export default class Cart extends Component {
             </table>
 
             <div className="item-price">
-              <p>${orderItem.product.price}.00</p>
+              <p>Unit Price: ${orderItem.product.price}.00</p>
             </div>
 
           </div>
@@ -88,6 +112,7 @@ export default class Cart extends Component {
     )
   }
 }
+
 
 /* PREVIOUS JSX
     <div>
