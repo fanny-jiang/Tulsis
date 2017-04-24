@@ -79,7 +79,7 @@ export default class Cart extends Component {
 
         {/* Checkout button */}
         <div className="checkout-btn clear">
-          <form action="/checkout">
+          <form action="/cart/checkout">
             <input type="submit" value="Checkout" />
           </form>
         </div>
