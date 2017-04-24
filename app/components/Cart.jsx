@@ -120,5 +120,4 @@ export default class Cart extends Component {
         <Link className="checkout-button" to="/checkout">Checkout</Link>
       </div>
     </div>
-
 */
