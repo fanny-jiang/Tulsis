@@ -19,6 +19,13 @@ button {
     text-align: center;
     text-transform: uppercase; }
 
+
+/* -------- ButtonClass -------- */
+.addSubtract {
+  width: 20px;
+  font-size: 0.75em !important;
+}
+
 /* --------- NavBar --------- */
 .navbar-title {
     padding: 10px; }
@@ -231,3 +238,4 @@ button {
 /* -------- Clearing our floats -------- */
 .clear {
     clear: both; }
+

@@ -77,4 +77,25 @@ module.exports = require('express').Router()
       .catch(next)
   })
 
+    .put('/:productId/subtract',
+  (req, res, next) => {
+    OrderItem.findOne({
+      where: { product_id: +req.params.productId }
+    })
+      .then(item => {
+        item.update(
+          { quantity: item.quantity - 1 },
+          { returning: true })
+          .then(item => {
+            // console.log('ITEM QUANTITY', item.dataValues.quantity)
+            res.send({
+              message: 'Quantity decreased by 1',
+              quantity: item.dataValues.quantity,
+              cart: req.cart
+            })
+          }).catch(next)
+      })
+      .catch(next)
+  })
+
   // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'

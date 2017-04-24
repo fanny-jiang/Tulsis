@@ -10,7 +10,8 @@ export default class Cart extends Component {
   constructor(props) {
     super(props)
     this.orderTotal = this.orderTotal.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
+    this.handleSubtract = this.handleSubtract.bind(this)
   }
 
   orderTotal(cart) {
@@ -19,10 +20,22 @@ export default class Cart extends Component {
     return prices.reduce((a, b) => a + b, 0)
   }
 
-  handleSubmit(evt) {
+  handleAdd(evt) {
     console.log('You hit the add button!')
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/add`)
+      .then(res => {
+        console.log('DID WE GET THE CART?', res.data.cart)
+        console.log('YASSS')
+        store.dispatch(updateCart(res.data.cart))
+      })
+      .catch(err => console.error('Cannot update quantity', err))
+  }
+
+  handleSubtract(evt) {
+    console.log('You hit the subtract button!')
+    evt.preventDefault()
+    axios.put(`/api/cart/${evt.target.value}/subtract`)
       .then(res => {
         console.log('DID WE GET THE CART?', res.data.cart)
         console.log('YASSS')
@@ -58,7 +71,8 @@ export default class Cart extends Component {
                 <tr>
                   <td>Qty:</td>
                   <td>{orderItem.quantity}</td>
-                  <td><button type="submit" onClick={this.handleSubmit} value={orderItem.product.id}>+</button></td>
+                  <td><button type="submit" className="addSubtract" onClick={this.handleAdd} value={orderItem.product.id}>+</button>
+                    <button type="submit" className="addSubtract" onClick={this.handleSubtract} value={orderItem.product.id}>-</button></td>
                 </tr>
                 <tr colSpan="3">
                   <td>Remove</td>
