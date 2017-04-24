@@ -8,8 +8,8 @@ class ShippingPaymentFormContainer extends Component {
     super(props)
     this.state = {
       paymentName: '',
-      ccnumber: 0,
-      cctype: '',
+      ccNumber: 0,
+      ccType: '',
       cvc: 0,
       expiry: '',
       shippingName: '',
@@ -35,8 +35,8 @@ class ShippingPaymentFormContainer extends Component {
     console.log('Here is the state', this.state)
     this.setState({
       paymentName: '',
-      ccnumber: 0,
-      cctype: '',
+      ccNumber: 0,
+      ccType: '',
       cvc: 0,
       expiry: '',
       shippingName: '',
@@ -52,15 +52,15 @@ class ShippingPaymentFormContainer extends Component {
     return (
       <ShippingPaymentForm
         inputPaymentName={this.state.paymentName}
-        inputccnumber={this.state.ccnumber}
-        inputcctype={this.state.cctype}
+        inputccNumber={this.state.ccNumber}
+        inputccType={this.state.ccType}
         inputcvc={this.state.cvc}
-        inputexpiry={this.state.expiry}
-        inputshippingName={this.state.shippingName}
-        inputstreet={this.state.street}
-        inputcity={this.state.city}
-        inputzip={this.state.zip}
-        inputstate={this.state.state}
+        inputExpiry={this.state.expiry}
+        inputShippingName={this.state.shippingName}
+        inputStreet={this.state.street}
+        inputCity={this.state.city}
+        inputZip={this.state.zip}
+        inputState={this.state.state}
 
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}

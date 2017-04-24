@@ -10,8 +10,8 @@ export const addNewSPInfo = state => {
     return axios.put(`/api/orders/1/buy`, {
       // payment: {
       //   paymentName: state.paymentName,
-      //   ccnumber: state.ccnumber,
-      //   cctype: state.cctype,
+      //   ccNumber: state.ccNumber,
+      //   ccType: state.ccType,
       //   cvc: state.cvc,
       //   expiry: state.expiry
       // },
