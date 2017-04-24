@@ -25,9 +25,9 @@ export default function Navbar(props) {
       {/* bottom block element with navigation links */}
       <div className="navbar-bottom">
         <Link to="/catalog">All</Link>
-        <Link to="/catalog/newborns">Newborns</Link>
-        <Link to="/catalog/infants">Infants</Link>
-        <Link to="/catalog/toddlers">Toddlers</Link>
+        <Link to="/catalog/Newborn">Newborns</Link>
+        <Link to="/catalog/Infant">Infants</Link>
+        <Link to="/catalog/Toddler">Toddlers</Link>
       </div>
 
     </div>
