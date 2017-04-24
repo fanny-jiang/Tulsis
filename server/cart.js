@@ -21,13 +21,13 @@ module.exports = require('express').Router()
   .post('/:productId',
   (req, res, next) => {
     Product.findById(req.params.productId)
-    .then(product => {
-      req.cart.addProduct(product,
-      { quantity: req.body.quantity })
-      return req.cart
-    })
-    .then(order => res.send(order))
-    .catch(next)
+      .then(product => {
+        req.cart.addProduct(product,
+          { quantity: req.body.quantity })
+        return req.cart
+      })
+      .then(order => res.send(order))
+      .catch(next)
   })
 
   // DELETE /:productId deletes* an item from our cart
@@ -48,27 +48,33 @@ module.exports = require('express').Router()
       { model: OrderItem },
       { where: { product_id: req.params.productId } },
       { returning: true })
-    .then(orderItem => res.send({
-      message: 'Modified quantity',
-      item: orderItem[1][0]
-    }))
-    .catch(next)
+      .then(orderItem => res.send({
+        message: 'Modified quantity',
+        item: orderItem[1][0]
+      }))
+      .catch(next)
   })
 
-// increments quantity of item by 1 (for '+' button in cart view)
+  // increments quantity of item by 1 (for '+' button in cart view)
   .put('/:productId/add',
   (req, res, next) => {
     OrderItem.findOne({
-      where: { product_id: req.params.productId }
+      where: { product_id: +req.params.productId }
     })
-    .then(item => {
-      item.update(
-        { quantity: item.quantity+1 },
-        { returning: true })
-      .then(item => res.send({
-        message: 'Quantity increased by 1',
-        item: item[1][0]
-      }))
-    })
-    .catch(next)
+      .then(item => {
+        item.update(
+          { quantity: item.quantity + 1 },
+          { returning: true })
+          .then(item => {
+            // console.log('ITEM QUANTITY', item.dataValues.quantity)
+            res.send({
+              message: 'Quantity increased by 1',
+              quantity: item.dataValues.quantity,
+              cart: req.cart
+            })
+          }).catch(next)
+      })
+      .catch(next)
   })
+
+  // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'

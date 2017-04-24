@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { updateCart } from '../action-creators/carts'
+import store from '../store'
 
 
 export default class Cart extends Component {
@@ -20,6 +23,11 @@ export default class Cart extends Component {
     console.log('You hit the add button!')
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/add`)
+      .then(res => {
+        console.log('DID WE GET THE CART?', res.data.cart)
+        console.log('YASSS')
+        store.dispatch(updateCart(res.data.cart))
+      })
       .catch(err => console.error('Cannot update quantity', err))
   }
 
@@ -50,7 +58,7 @@ export default class Cart extends Component {
                 <tr>
                   <td>Qty:</td>
                   <td>{orderItem.quantity}</td>
-                  <td><button type="submit" onSubmit={this.handleSubmit} value={orderItem.product.id}>+</button></td>
+                  <td><button type="submit" onClick={this.handleSubmit} value={orderItem.product.id}>+</button></td>
                 </tr>
                 <tr colSpan="3">
                   <td>Remove</td>
@@ -88,6 +96,7 @@ export default class Cart extends Component {
     )
   }
 }
+
 
 /* PREVIOUS JSX
     <div>
