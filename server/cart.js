@@ -7,8 +7,23 @@ const Product = db.model('products')
 const User = db.model('users') // for orders by a user
 const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
-module.exports = require('express').Router()
+const loadCart = (req, res, next) => {
+  const user = req.user
+  if (!user) {
+    next()
+  } else {
+    return Order.scope('populated').findOne({where: { user_id: user.id, status: 'Pending' }})
+      .then(cart => {
+        req.cart = cart
+        next()
+        return null
+      })
+      .catch(next)
+  }
+}
 
+module.exports = require('express').Router()
+  .use(loadCart)
   // GET / sends back the cart, which is an instance of Order
   .get('/',
   (req, res, next) =>
@@ -59,21 +74,37 @@ module.exports = require('express').Router()
   .put('/:productId/add',
   (req, res, next) => {
     OrderItem.findOne({
-      where: { product_id: +req.params.productId }
+      where: { product_id: +req.params.productId },
+      include: [{model: Product}]
     })
       .then(item => {
-        item.update(
+        const productInventory = item.product.dataValues.quantity
+        if (item.quantity >= productInventory) {
+          return res.status(400).send('Out of stock')
+        }
+        console.log('DID WE GET TO PRODUCT/ID/ADD', item)
+        return item.update(
           { quantity: item.quantity + 1 },
           { returning: true })
-          .then(item => {
+          // .then(item => {
+          //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
+          // })
+      })
+      .then(() => next())
+      .catch(next)
+  },
+  loadCart, // reload it because it just changed
+  (req, res, next) => {
+    console.log('CART: ', req.cart)
+          // .then(product => {
+          //   console.log('WHAT IS THIS: ', product)
             res.send({
               message: 'Quantity increased by 1',
-              quantity: item.dataValues.quantity,
-              cart: req.cart
+              cart: req.cart // need to refetch cart, might want to create fx that we can .then call fetch
             })
-          }).catch(next)
-      })
-      .catch(next)
+          // }).catch(next)
+      // })
+      // .catch(next)
   })
 
   // decrements quantity of item by 1 (for '-' button in cart view)
@@ -83,7 +114,10 @@ module.exports = require('express').Router()
       where: { product_id: +req.params.productId }
     })
       .then(item => {
-        item.update(
+        if (item.quantity < 1) {
+          res.status(400).send('Please add item to cart')
+        } else {
+          item.update(
           { quantity: item.quantity - 1 },
           { returning: true })
           .then(item => {
@@ -93,6 +127,7 @@ module.exports = require('express').Router()
               cart: req.cart
             })
           }).catch(next)
+        }
       })
       .catch(next)
   })

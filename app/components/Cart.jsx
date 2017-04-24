@@ -16,10 +16,8 @@ export default class Cart extends Component {
 
   orderTotal(cart) {
     var prices = []
-    console.log('CART FROM PROPS', cart)
     cart.map(item => {
       prices.push(item.product.price * item.quantity)
-      console.log('PRICES: ', prices)
     })
     return prices.reduce((a, b) => a + b, 0)
   }
@@ -29,8 +27,7 @@ export default class Cart extends Component {
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/add`)
       .then(res => {
-        console.log('DID WE GET THE CART?', res.data.cart)
-        console.log('YASSS')
+        console.log('RES.DATA: ', res.data)
         store.dispatch(updateCart(res.data.cart))
       })
       .catch(err => console.error('Cannot update quantity', err))
@@ -41,6 +38,9 @@ export default class Cart extends Component {
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/subtract`)
       .then(res => {
+        // if (res.status === 400) {
+        //   window.alert('Can\'t have negative quantity!')
+        // }
         store.dispatch(updateCart(res.data.cart))
       })
       .catch(err => console.error('Cannot update quantity', err))

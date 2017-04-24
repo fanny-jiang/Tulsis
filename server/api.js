@@ -7,20 +7,6 @@ const Order = db.model('orders')
 const OrderItem = db.model('orderItems')
 const Product = db.model('products')
 
-api.use((req, res, next) => {
-  const user = req.user
-  if (!user) {
-    next()
-  } else {
-    Order.scope('populated').findOne({where: { user_id: user.id, status: 'Pending' }})
-      .then(cart => {
-        req.cart = cart
-        next()
-      })
-      .catch(next)
-  }
-})
-
 api
   .get('/heartbeat', (req, res) => res.send({ ok: true }))
   .use('/auth', require('./auth'))
