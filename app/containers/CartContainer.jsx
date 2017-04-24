@@ -1,14 +1,12 @@
 import Cart from '../components/Cart'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import axios from 'axios'
 
 const mapStateToProps = (state) => {
-  console.log('cart container state', state)
   return {
     cart: state.cart.orderItems
   }
 }
 
-const CartContainer = connect(mapStateToProps)(Cart)
-
-export default CartContainer
+export default connect(mapStateToProps)(Cart)

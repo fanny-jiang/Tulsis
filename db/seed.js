@@ -20,13 +20,13 @@ function seedEverything() {
 
 const users = seed(User, {
   stef: {
-    email: 'stefanie@email.com',
+    email: 'stef@email.com',
     name: 'Stefanie Sundby',
     password: '1234',
   },
   maria: {
     name: 'Maria Schreiber',
-    email: 'maria2@email.com',
+    email: 'maria@email.com',
     password: '1234'
   },
   fanny: {
@@ -56,38 +56,128 @@ const users = seed(User, {
   },
 })
 
+const placeholderUrl = 'http://nord.imgix.net/Zoom/0/_7493060.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60'
+
 const products = seed(Product, {
   converse: {
-    title: 'converse',
-    description: 'tiny converse sneakers',
+    title: 'Chuck Taylor Low Top',
+    description: 'Even little ones need their own Chucks. The classic Chuck Taylor was first designed in 1917 as a performance basketball shoe.',
     price: 30,
-    photoUrl: '/url/converse',
+    photoUrl: 'http://nord.imgix.net/Zoom/0/_7493060.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
     quantity: 50,
     category: ['Infant', 'Newborn', 'Toddler']
   },
   booties: {
-    title: 'booties',
-    description: 'tiny bootie boots',
-    price: 25,
-    photoUrl: '/url/booties',
+    title: 'Thea Twinkle Bootie',
+    description: 'A glitter-dusted finish and warm faux-fur cuff add playful pizzazz to a cute crib shoe finished with a comfy and flexible leather sole.',
+    price: 38,
+    photoUrl: 'http://nord.imgix.net/Zoom/11/_13050391.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn']
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  moc_booties: {
+    title: 'Sparrow Boot',
+    description: 'An adorable moc-stitched suede bootie features a plush, fold-over shearling cuff guaranteed to keep little feet deliciously cozy.',
+    price: 60,
+    photoUrl: 'http://nord.imgix.net/Zoom/10/_10546230.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  rain_boots: {
+    title: 'Sandor Rain Boot',
+    description: 'Little boots with a fun mix of prints and a glossy finish feature an easily adjustable hook-and-loop closure for a comfy fit.',
+    price: 36,
+    photoUrl: 'http://nord.imgix.net/Zoom/6/_100768326.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  pink_boots: {
+    title: 'Classic Fur Bootie',
+    description: 'A cozy slip-on bootie stays put with an elasticized ankle design, skid-resistant suede sole and soft, flexible leather upper.',
+    price: 38,
+    photoUrl: 'http://nord.imgix.net/Zoom/1/_8257041.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  shark_shoes: {
+    title: 'Dino Dan Crib Shoe',
+    description: 'Toothy sharks add playful aquatic charm to soft, flexible crib shoes topped with stay-put elastic cuffs.',
+    price: 26,
+    photoUrl: 'http://nord.imgix.net/Zoom/12/_10243312.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  spotty_mocs: {
+    title: 'Dalmatian Moccasin',
+    description: 'Rose-gold metallic fringe and cute dalmatian spots make this moccasin-style crib shoe an instant favorite.',
+    price: 49,
+    photoUrl: 'http://nord.imgix.net/Zoom/19/_13233279.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
+  },
+  moccasins: {
+    title: 'Classic Moccasin',
+    description: 'A kiltie fringe makes a cute accent on a soft, supple leather moccasin perfectly sized for little feet.',
+    price: 60,
+    photoUrl: 'http://nord.imgix.net/Zoom/13/_100429853.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Infant', 'Newborn', 'Toddler']
   },
   nikes: {
-    title: 'nikes',
-    description: 'tiny nike sneakers',
-    price: 15,
-    photoUrl: '/url/nikes',
+    title: 'Air Max Thea Sneaker',
+    description: 'A signature Nike Swoosh adds a pop of color to a lightweight, minimalist sneaker fashioned with runner-inspired detailing.',
+    price: 55,
+    photoUrl: 'http://nord.imgix.net/Zoom/2/_13318742.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 75,
     category: ['Newborn', 'Toddler']
   },
   sandals: {
-    title: 'sandals',
-    description: 'tiny sandals for sunny days',
-    price: 10,
-    photoUrl: '/url/sandals',
+    title: 'Sandals',
+    description: 'Tiny sandals for sunny days.',
+    price: 36,
+    photoUrl: 'http://nord.imgix.net/Zoom/5/_100428605.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
     category: ['Infant', 'Toddler']
+  },
+  toms: {
+    title: 'Chambray Slip-On',
+    description: 'Classic chambray keeps warm-weather looks cool and casual in an essential slip-on featuring an adjustable tab at the vamp.',
+    price: 35,
+    photoUrl: 'http://nord.imgix.net/Zoom/6/_100544226.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
+    quantity: 100,
+    category: ['Infant', 'Toddler']    
+  },
+  adventure_shoes: {
+    title: 'Sam Customizable Sneaker',
+    description: 'A breezy, customizable sneaker is designed to stay comfortable on the go with a shock-absorbing, antimicrobial Eco-OrthoLite® footbed.',
+    price: 50,
+    photoUrl: 'http://nord.imgix.net/Zoom/19/_100531579.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 70,
+    category: ['Newborn', 'Infant', 'Toddler']   
+  },
+  jellies: {
+    title: 'Campana Mary Jane',
+    description: 'A sparkly, fruit-scented jelly flat with playful retro charm has a hook-and-loop mary-jane strap for easy on and off.',
+    price: 55,
+    photoUrl: 'http://nord.imgix.net/Zoom/7/_12130907.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 150,
+    category: ['Newborn', 'Infant', 'Toddler']   
+  },
+  preppy_sneakers: {
+    title: 'Lacoste Evo Sneaker',
+    description: 'A signature croc at the side and heel brand a comfy low-top sneaker with a croc-texture finish and a grippy cupsole to help promote confident early steps.',
+    price: 60,
+    photoUrl: 'http://nord.imgix.net/Zoom/13/_100867873.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Toddler']
+  },
+  red_grey_sneakers: {
+    title: 'Tanner Sneaker',
+    description: 'A sporty, versatile sneaker is designed with young adventurers in mind, featuring an easy-on hook-and-loop strap and rubber toe bumper to protect little feet.',
+    price: 40,
+    photoUrl: 'http://nord.imgix.net/Zoom/14/_12120074.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
+    quantity: 100,
+    category: ['Newborn', 'Infant', 'Toddler']
   }
 })
 
@@ -113,6 +203,14 @@ const favorites = seed(Favorite,
       user_id: users.stef.id,
       product_id: products.booties.id
     },
+    'stef loves jellies': {
+      user_id: users.stef.id,
+      product_id: products.jellies.id
+    },
+    'stef loves mocs': {
+      user_id: users.stef.id,
+      product_id: products.moccasins.id
+    },
     'fanny loves nikes': {
       user_id: users.fanny.id,
       product_id: products.nikes.id
@@ -120,6 +218,14 @@ const favorites = seed(Favorite,
     'maria loves sandals': {
       user_id: users.maria.id,
       product_id: products.sandals.id
+    },
+    'maria loves red_grey_sneakers': {
+      user_id: users.maria.id,
+      product_id: products.red_grey_sneakers.id
+    },
+    'tina loves shark_shoes': {
+      user_id: users.maria.id,
+      product_id: products.shark_shoes.id
     },
     'tina loves converse': {
       user_id: users.tina.id,
@@ -145,21 +251,35 @@ const orders = seed(Order,
     'ashis booties order': {
       status: 'Completed',
       user_id: users.ashi.id
+    },
+    'stefs order': {
+      status: 'Pending',
+      user_id: users.stef.id
     }
   })
 )
 
 const orderItems = seed(OrderItem,
   ({products, orders}) => ({
-    'bens order nikes item': {
+    'bens order': {
       quantity: 1,
       product_id: products.nikes.id,
       order_id: orders['bens nike order'].id
     },
-    'ashis order botties item': {
+    'ashis order': {
       quantity: 2,
       product_id: products.booties.id,
       order_id: orders['ashis booties order'].id
+    },
+    'stefs jellies order': {
+      quantity: 2,
+      product_id: products.jellies.id,
+      order_id: orders['stefs order'].id
+    },
+    'stefs rain boots order': {
+      quantity: 1,
+      product_id: products.rain_boots.id,
+      order_id: orders['stefs order'].id
     }
   })
   )
