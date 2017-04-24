@@ -12,11 +12,15 @@ const loadCart = (req, res, next) => {
   if (!user) {
     next()
   } else {
-    return Order.scope('populated').findOne({ where: { user_id: user.id, status: 'Pending' } })
+    Order.scope('populated')
+      .findOrCreate({
+        where: { user_id: user.id, status: 'Pending' },
+        defaults: { user_id: user.id, status: 'Pending' },
+        // include: [ User ]
+      })
       .then(cart => {
-        req.cart = cart
+        req.cart = cart[0]
         next()
-        return null
       })
       .catch(next)
   }
