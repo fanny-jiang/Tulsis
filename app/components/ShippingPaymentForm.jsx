@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default function ShippingPaymentForm(props) {
   const handleChange = props.handleChange
@@ -127,7 +128,9 @@ export default function ShippingPaymentForm(props) {
 
           {/* 'Complete Order' Button */}
           <div >
+            <Link to="/confirmation">
             <button className="complete-order-btn">Complete Order</button>
+            </Link>
           </div>
 
         </form >

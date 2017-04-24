@@ -52,7 +52,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-
+        <Route path="confirmation" component={OrderConfirmation}/>
         <Route path="cart" component={CartContainer} />
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
         <Route path="catalog" component={CatalogContainer}>
