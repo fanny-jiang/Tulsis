@@ -6,6 +6,26 @@ const db = require('APP/db')
 const Order = db.model('orders')
 const OrderItem = db.model('orderItems')
 const Product = db.model('products')
+// const User = db.model('users')
+
+api.use((req, res, next) => {
+  const user = req.user
+  if (!user) {
+    next()
+  } else {
+    Order.scope('populated')
+      .findOrCreate({
+        where: { user_id: user.id, status: 'Pending' },
+        defaults: { user_id: user.id, status: 'Pending' },
+        // include: [ User ]
+      })
+      .then(cart => {
+        req.cart = cart[0]
+        next()
+      })
+      .catch(next)
+  }
+})
 
 api
   .get('/heartbeat', (req, res) => res.send({ ok: true }))
