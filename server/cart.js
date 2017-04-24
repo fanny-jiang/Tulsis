@@ -41,19 +41,19 @@ module.exports = require('express').Router()
   })
 
   // PUT /:productId changes the quantity of an item in cart
-  .put('/:productId',
-  (req, res, next) => {
-    req.cart.update(
-      { quantity: req.body.quantity },
-      { model: OrderItem },
-      { where: { product_id: req.params.productId } },
-      { returning: true })
-      .then(orderItem => res.send({
-        message: 'Modified quantity',
-        item: orderItem[1][0]
-      }))
-      .catch(next)
-  })
+  // .put('/:productId',
+  // (req, res, next) => {
+  //   req.cart.update(
+  //     { quantity: req.body.quantity },
+  //     { model: OrderItem },
+  //     { where: { product_id: req.params.productId } },
+  //     { returning: true })
+  //     .then(orderItem => res.send({
+  //       message: 'Modified quantity',
+  //       item: orderItem[1][0]
+  //     }))
+  //     .catch(next)
+  // })
 
   // increments quantity of item by 1 (for '+' button in cart view)
   .put('/:productId/add',
@@ -66,7 +66,6 @@ module.exports = require('express').Router()
           { quantity: item.quantity + 1 },
           { returning: true })
           .then(item => {
-            // console.log('ITEM QUANTITY', item.dataValues.quantity)
             res.send({
               message: 'Quantity increased by 1',
               quantity: item.dataValues.quantity,
@@ -77,6 +76,7 @@ module.exports = require('express').Router()
       .catch(next)
   })
 
+  // decrements quantity of item by 1 (for '-' button in cart view)
     .put('/:productId/subtract',
   (req, res, next) => {
     OrderItem.findOne({
@@ -87,7 +87,6 @@ module.exports = require('express').Router()
           { quantity: item.quantity - 1 },
           { returning: true })
           .then(item => {
-            // console.log('ITEM QUANTITY', item.dataValues.quantity)
             res.send({
               message: 'Quantity decreased by 1',
               quantity: item.dataValues.quantity,

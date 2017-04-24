@@ -37,8 +37,6 @@ export default class Cart extends Component {
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/subtract`)
       .then(res => {
-        console.log('DID WE GET THE CART?', res.data.cart)
-        console.log('YASSS')
         store.dispatch(updateCart(res.data.cart))
       })
       .catch(err => console.error('Cannot update quantity', err))
