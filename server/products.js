@@ -1,5 +1,4 @@
 'use strict'
-
 const db = require('APP/db')
 const Product = db.model('products')
 
@@ -12,6 +11,22 @@ module.exports = require('express').Router()
     Product.findAll()
       .then(products => res.json(products))
       .catch(next))
+
+//GET all products by category
+  .get('/category/:categoryname', (req, res, next) => {
+    const cat = req.params.categoryname
+    Product.findAll({
+      where: {
+        category: {
+        $contains: [cat]
+        }
+      }
+    })
+    .then(products => {
+      res.json(products)
+    })
+    .catch(next)
+    })
 
   // GET single product by id
   .get('/:id',
@@ -28,7 +43,7 @@ module.exports = require('express').Router()
       .catch(next))
 
   // PUT - update a product instance
-  .put('/:id', (req, res, next) => 
+  .put('/:id', (req, res, next) =>
     Product.update(req.body, {
       where: { id: req.params.id },
       returning: true
