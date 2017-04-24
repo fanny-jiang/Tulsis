@@ -21,3 +21,13 @@ export const getProductById = productId => {
       })
   }
 }
+
+export const getProductsByCategory = categoryName => {
+  return dispatch => {
+    console.log("IN getProductsByCategory:", categoryName)
+    axios.get(`/api/products/category/${categoryName}`)
+    .then(res => {
+      dispatch(receiveProducts(res.data))
+    })
+  }
+}

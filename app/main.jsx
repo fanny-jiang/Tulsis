@@ -23,7 +23,7 @@ import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContai
 
 import ProductContainer from './containers/ProductContainer'
 
-import { receiveProducts, getProductById } from './action-creators/products'
+import { receiveProducts, getProductById, getProductsByCategory } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
 import { receiveUsers } from './action-creators/users'
 import { receiveOrders } from './action-creators/orders'
@@ -51,6 +51,14 @@ const onCartEnter = function() {
   get('/api/cart', receiveCart)
 }
 
+
+//possiblity to reuse the catalogue container and component, just with different props.
+const onCategoryEnter = function(nextRouterState) {
+  const categoryName = nextRouterState.params.categoryName
+  store.dispatch(getProductsByCategory(categoryName))
+}
+
+
 const App = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -68,7 +76,8 @@ render(
         <Route path="confirmation" component={OrderConfirmation}/>
         <Route path="cart" component={CartContainer} onEnter={onCartEnter}/>
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
-        <Route path="catalog" component={CatalogContainer} />
+        <Route path="catalog" component={CatalogContainer} onEnter={onAppEnter}/>
+        <Route path="catalog/:categoryName" component={CatalogContainer} onEnter={onCategoryEnter}/>
         <Route path="catalog/:productId" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="user/:userId" component={User}>
           <Route path="/orders" component={OrderHistory} />

@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 export default function Catalog(props) {
   const products = props.products
+  console.log("IN CATALOG VIEW: ", products)
 
   return (
     <div className="main-container">

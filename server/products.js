@@ -18,11 +18,12 @@ module.exports = require('express').Router()
     Product.findAll({
       where: {
         category: {
-        $contains: [cat]
+          $contains: [cat]
         }
       }
     })
     .then(products => {
+      console.log(products)
       res.json(products)
     })
     .catch(next)
