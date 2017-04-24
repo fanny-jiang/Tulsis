@@ -12,6 +12,7 @@ export default class Cart extends Component {
     this.orderTotal = this.orderTotal.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleSubtract = this.handleSubtract.bind(this)
+    this.removeFromCart = this.removeFromCart.bind(this)
   }
 
   orderTotal(cart) {
@@ -22,24 +23,33 @@ export default class Cart extends Component {
     return prices.reduce((a, b) => a + b, 0)
   }
 
+  removeFromCart(evt) {
+    console.log('You hit the remove button!')
+    // evt.preventDefault()
+    axios.delete(`/api/cart/${evt.target.value}`)
+      .then(res => {
+        console.log('RES.DATA: ', res.data)
+        store.dispatch(updateCart(res.data.cart))
+      })
+      .catch(err => console.error('Cannot remove item from cart', err))
+  }
+
   handleAdd(evt) {
-    console.log('You hit the add button!')
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/add`)
       .then(res => {
-        console.log('RES.DATA: ', res.data)
         store.dispatch(updateCart(res.data.cart))
       })
       .catch(err => console.error('Cannot update quantity', err))
   }
 
   handleSubtract(evt) {
-    console.log('You hit the subtract button!')
     evt.preventDefault()
     axios.put(`/api/cart/${evt.target.value}/subtract`)
       .then(res => {
         // if (res.status === 400) {
         //   window.alert('Can\'t have negative quantity!')
+        // We can't seem to make the alert work
         // }
         store.dispatch(updateCart(res.data.cart))
       })
@@ -73,11 +83,28 @@ export default class Cart extends Component {
                 <tr>
                   <td>Qty:</td>
                   <td>{orderItem.quantity}</td>
-                  <td><button type="submit" className="addSubtract" onClick={this.handleAdd} value={orderItem.product.id}>+</button>
-                    <button type="submit" className="addSubtract" onClick={this.handleSubtract} value={orderItem.product.id}>-</button></td>
+                  <td>
+                    <button
+                      type="submit"
+                      className="addSubtract"
+                      onClick={this.handleAdd}
+                      value={orderItem.product.id}>+</button>
+
+                    <button
+                      type="submit"
+                      className="addSubtract"
+                      onClick={this.handleSubtract}
+                      value={orderItem.product.id}>-</button>
+                  </td>
+
                 </tr>
                 <tr colSpan="3">
-                  <td>Remove</td>
+                  <td>
+                    <button
+                      type="submit"
+                      onClick={this.removeFromCart}
+                      value={orderItem.product.id}>Remove Item From Cart</button>
+                  </td>
                 </tr>
               </tbody>
             </table>

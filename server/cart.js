@@ -50,29 +50,27 @@ module.exports = require('express').Router()
   })
 
   // DELETE /:productId deletes* an item from our cart
-  // NOTE: if this doesn't work well, we change item quantity to 0 instead
   .delete('/:productId',
   (req, res, next) => {
-    req.cart.destroy(
-      { model: OrderItem },
-      { where: { product_id: req.params.productId } })
+    OrderItem.destroy(
+      {
+        where: {
+          product_id: req.params.productId,
+          order_id: req.cart.id
+        }
+      })
+      .then(() => next())
       .catch(next)
+  },
+  loadCart,
+  (req, res, next) => {
+    res.send({
+      message: 'Item deleted',
+      cart: req.cart
+    })
   })
 
-  // PUT /:productId changes the quantity of an item in cart
-  // .put('/:productId',
-  // (req, res, next) => {
-  //   req.cart.update(
-  //     { quantity: req.body.quantity },
-  //     { model: OrderItem },
-  //     { where: { product_id: req.params.productId } },
-  //     { returning: true })
-  //     .then(orderItem => res.send({
-  //       message: 'Modified quantity',
-  //       item: orderItem[1][0]
-  //     }))
-  //     .catch(next)
-  // })
+
 
   // increments quantity of item by 1 (for '+' button in cart view)
   .put('/:productId/add',
@@ -89,6 +87,7 @@ module.exports = require('express').Router()
         return item.update(
           { quantity: item.quantity + 1 },
           { returning: true })
+        //  Eventually move this update to the checkout portion
         // .then(item => {
         //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
         // })
@@ -127,6 +126,22 @@ module.exports = require('express').Router()
       message: 'Quantity decreased by 1',
       cart: req.cart
     })
+  })
+
+  // PUT /:productId changes the quantity of an item in cart
+  // We don't need this for the cart view -- do we need it anywhere else?
+  .put('/:productId',
+  (req, res, next) => {
+    req.cart.update(
+      { quantity: req.body.quantity },
+      { model: OrderItem },
+      { where: { product_id: req.params.productId } },
+      { returning: true })
+      .then(orderItem => res.send({
+        message: 'Modified quantity',
+        item: orderItem[1][0]
+      }))
+      .catch(next)
   })
 
   // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'
