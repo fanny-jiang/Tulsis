@@ -3,10 +3,10 @@ import { Link } from 'react-router'
 import axios from 'axios'
 
 export default function Product(props) {
-  console.log('PROPS: ', props)
+  console.log('IS ANYTHING HERE? PROPS in Product: ', props)
 
-  const product = props.selected || [] // product component may render before props have been received
-  
+  const product = props.product || [] // product component may render before props have been received
+
   return (
     <div className="main-container">
 

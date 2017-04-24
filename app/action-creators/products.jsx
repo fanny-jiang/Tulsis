@@ -13,8 +13,10 @@ export const receiveProduct = product => ({
 
 export const getProductById = productId => {
   return dispatch => {
+    console.log("IN GETPRODUCTBYID:", productId)
     axios.get(`/api/products/${productId}`)
       .then(res => {
+        console.log("RESPONSE: ", res)
         dispatch(receiveProduct(res.data))
       })
   }

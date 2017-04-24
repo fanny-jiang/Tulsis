@@ -1,9 +1,10 @@
 import Product from '../components/Product'
+import React from 'react';
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
-    products: state.productsList
+    product: state.products.selected
   }
 }
 

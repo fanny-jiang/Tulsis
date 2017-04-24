@@ -19,13 +19,9 @@ import OrderConfirmation from './components/OrderConfirmation'
 import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
 
-
 import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
-
 
 import ProductContainer from './containers/ProductContainer'
-import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
-
 
 import { receiveProducts, getProductById } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
@@ -46,7 +42,9 @@ const onAppEnter = () => {
 }
 
 const onProductEnter = function(nextRouterState) {
+
   const productId = nextRouterState.params.productId
+  console.log("IN onProductEnter: ", productId)
   store.dispatch(getProductById(productId))
 }
 
