@@ -20,7 +20,6 @@ import CartContainer from './containers/CartContainer'
 import CatalogContainer from './containers/CatalogContainer'
 import ProductContainer from './containers/ProductContainer'
 import ShippingPaymentFormContainer from './containers/ShippingPaymentFormContainer'
-import ProductContainer from './containers/ProductContainer'
 
 import { receiveProducts, getProductById } from './action-creators/products'
 import { receiveReviews } from './action-creators/reviews'
