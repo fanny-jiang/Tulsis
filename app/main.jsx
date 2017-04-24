@@ -44,8 +44,11 @@ const onAppEnter = () => {
 const onProductEnter = function(nextRouterState) {
 
   const productId = nextRouterState.params.productId
-  console.log("IN onProductEnter: ", productId)
   store.dispatch(getProductById(productId))
+}
+
+const onCartEnter = function() {
+  get('/api/cart', receiveCart)
 }
 
 const App = connect(
@@ -63,7 +66,7 @@ render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
         <Route path="confirmation" component={OrderConfirmation}/>
-        <Route path="cart" component={CartContainer} />
+        <Route path="cart" component={CartContainer} onEnter={onCartEnter}/>
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
         <Route path="catalog" component={CatalogContainer} />
         <Route path="catalog/:productId" component={ProductContainer} onEnter={onProductEnter} />
