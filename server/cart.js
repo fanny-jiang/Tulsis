@@ -142,6 +142,7 @@ module.exports = require('express').Router()
         })
         .then((product) => {
           console.log('Updated Product quantity', product[1][0].quantity)
+          // next() ?
         })
         .catch(next)
     })
