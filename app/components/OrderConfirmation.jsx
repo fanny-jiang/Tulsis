@@ -7,7 +7,7 @@ export default function ConfirmationPage() {
         <br/>
         <br/>
         <h1 style={{textAlign: 'center'}}>Thank you for your order!</h1>
-        <h5 style={{textAlign: 'center'}}> Click <Link to={`catalog/`}> here </Link> to continue shopping. </h5>
+        <p className="heading" style={{textAlign: 'center'}}> Click <Link to={`catalog/`}> here </Link> to continue shopping. </p>
     </div>
   )
 }
