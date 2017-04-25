@@ -232,6 +232,21 @@ button {
       margin: 10px;
         width: 25%; }
 
+.submit-pay-btn {
+    display: block;
+    margin: 50px auto;
+    background-color: lightcoral;
+    border: 0.5px solid black;
+    padding: 5px 20px;
+    font-family: Avenir;
+    font-size: 1.2em;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
 .complete-order-btn {
     display: block;
     margin: 50px auto;
@@ -244,7 +259,8 @@ button {
     letter-spacing: 0.05em;
     text-align: center;
     text-transform: uppercase;
-    text-decoration: none; }
+    text-decoration: none;
+    float: right; }
 
 /* -------- Clearing our floats -------- */
 .clear {

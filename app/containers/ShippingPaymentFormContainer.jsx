@@ -20,7 +20,8 @@ class ShippingPaymentFormContainer extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
+    this.handleShipSubmit = this.handleShipSubmit.bind(this)
   }
 
   handleChange(evt) {
@@ -28,8 +29,26 @@ class ShippingPaymentFormContainer extends Component {
       [evt.target.name]: evt.target.value
     })
   }
+  handleShipSubmit(evt) {
+    evt.preventDefault()
+    this.props.addNewSPInfo(this.state)
+    console.log('Here is the state', this.state)
+    this.setState({
+      paymentName: '',
+      ccNumber: 0,
+      ccType: '',
+      cvc: 0,
+      expiry: '',
+      shippingName: '',
+      street: '',
+      city: '',
+      zip: '',
+      state: ''
+    })
+    console.log('Now the state is ', this.state)
+  }
 
-  handleSubmit(evt) {
+  handlePaymentSubmit(evt) {
     evt.preventDefault()
     this.props.addNewSPInfo(this.state)
     console.log('Here is the state', this.state)
@@ -63,7 +82,8 @@ class ShippingPaymentFormContainer extends Component {
         inputState={this.state.state}
 
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
+        handlePaymentSubmit={this.handlePaymentSubmit}
+        handleShipSubmit={this.handleShipSubmit}
       />
     )
   }
