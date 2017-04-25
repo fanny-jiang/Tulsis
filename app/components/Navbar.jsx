@@ -7,11 +7,16 @@ export default function Navbar(props) {
   return (
     <div>
 
+      {/* left block element with Tulsi */}
+      <div className="tulsi-pic">
+        <img className='tulsi' src="/images/tulsi.jpg" />
+      </div>
+
       {/* floating element with login/signup and cart links */}
       <div className="navbar-user-menu">
-          { props.user
-            ? <WhoAmI />
-            : <Login /> }
+        {props.user
+          ? <WhoAmI />
+          : <Login />}
         <Link to="/cart">
           <img src="/images/cart_icon.jpeg" className="icon" />
         </Link>
@@ -19,7 +24,7 @@ export default function Navbar(props) {
 
       {/* topmost block element with store name */}
       <div className="navbar-title">
-        <Link to="/home">Babies</Link>
+        <Link to="/catalog">Tulsi's</Link>
       </div>
 
       {/* bottom block element with navigation links */}

@@ -20,7 +20,7 @@ button {
     text-transform: uppercase; }
 
 
-/* -------- ButtonClass -------- */
+/* -------- AddSubtract ButtonClass -------- */
 .addSubtract {
   width: 20px;
   font-size: 0.75em !important;
@@ -40,6 +40,14 @@ button {
         text-transform: uppercase;
         text-decoration: none; }
 
+.tulsi-pic{
+    left: 30px; 
+    float: left;
+}
+
+.tulsi{
+  height: 105px;
+}
 .navbar-user-menu {
     position: absolute;
     margin: 10px auto;
