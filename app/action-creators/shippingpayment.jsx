@@ -4,10 +4,10 @@ import {
 import axios from 'axios'
 import { checkoutOrder } from './orders'
 
-export const addNewSPInfo = state => {
+export const addNewSPInfo = (state, orderId) => {
   return (dispatch, getState) => {
-    // Still need to add orderId ${state.orderId}
-    return axios.put(`/api/orders/1/buy`, {
+    // console.log('ROUTE FROM SHIP ACTION CREATOR', `/api/cart/${orderId}/buy`)
+    return axios.put(`/api/cart/${orderId}/buy`, {
       // payment: {
       //   paymentName: state.paymentName,
       //   ccNumber: state.ccNumber,
