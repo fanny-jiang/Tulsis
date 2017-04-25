@@ -2,10 +2,14 @@ import { connect } from 'react-redux'
 import ShippingPaymentForm from '../components/ShippingPaymentForm'
 import React, { Component } from 'react'
 import { addNewSPInfo } from '../action-creators/shippingPayment'
+import axios from 'axios'
+import store from '../store'
+import { updateCart } from '../action-creators/carts'
 
 class ShippingPaymentFormContainer extends Component {
   constructor(props) {
     super(props)
+    // console.log('PROPS FROM CONTAINER', props)
     this.state = {
       paymentName: '',
       ccNumber: 0,
@@ -18,9 +22,9 @@ class ShippingPaymentFormContainer extends Component {
       zip: '',
       state: ''
     }
-
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
+    this.handleShipSubmit = this.handleShipSubmit.bind(this)
   }
 
   handleChange(evt) {
@@ -28,10 +32,29 @@ class ShippingPaymentFormContainer extends Component {
       [evt.target.name]: evt.target.value
     })
   }
-
-  handleSubmit(evt) {
+  handleShipSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewSPInfo(this.state)
+    // console.log('ORDER-ID FROM SHIP CONTAINER', evt.target.value)
+    this.props.addNewSPInfo(this.state, evt.target.value)
+    axios.put(`/api/cart/${evt.target.value}/buy`,
+      {
+        address: {
+          street: this.state.street,
+          city: this.state.city,
+          zip: this.state.zip,
+          state: this.state.state
+        }
+      })
+      .then(res => {
+        console.log('RES: ', res)
+        store.dispatch(updateCart(res.data.cart))
+      })
+      .catch(err => console.error('Cannot complete order', err))
+  }
+
+  handlePaymentSubmit(evt) {
+    evt.preventDefault()
+    this.props.addNewSPInfo(this.state, evt.target.value)
     console.log('Here is the state', this.state)
     this.setState({
       paymentName: '',
@@ -51,6 +74,7 @@ class ShippingPaymentFormContainer extends Component {
   render() {
     return (
       <ShippingPaymentForm
+        cart={this.props.cart}
         inputPaymentName={this.state.paymentName}
         inputccNumber={this.state.ccNumber}
         inputccType={this.state.ccType}
@@ -61,9 +85,9 @@ class ShippingPaymentFormContainer extends Component {
         inputCity={this.state.city}
         inputZip={this.state.zip}
         inputState={this.state.state}
-
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
+        handlePaymentSubmit={this.handlePaymentSubmit}
+        handleShipSubmit={this.handleShipSubmit}
       />
     )
   }
@@ -71,10 +95,16 @@ class ShippingPaymentFormContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewSPInfo(state) {
-      dispatch(addNewSPInfo(state))
+    addNewSPInfo(state, orderId) {
+      dispatch(addNewSPInfo(state, orderId))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(ShippingPaymentFormContainer)
+const mapState = (state) => {
+  return {
+    cart: state.cart
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(ShippingPaymentFormContainer)

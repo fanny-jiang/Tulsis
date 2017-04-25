@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 
 export default function ShippingPaymentForm(props) {
+  const cart = props.cart
   const handleChange = props.handleChange
-  const handleSubmit = props.handleSubmit
+  const handlePaymentSubmit = props.handlePaymentSubmit
+  const handleShipSubmit = props.handleShipSubmit
   const inputPaymentName = props.inputPaymentName
   const inputccNumber = props.ccNumber
   const inputccType = props.ccType
@@ -14,6 +16,7 @@ export default function ShippingPaymentForm(props) {
   const inputCity = props.city
   const inputZip = props.zip
   const inputState = props.state
+  let showPayHideShip = false
 
   return (
     <div className="main-container">
@@ -24,9 +27,9 @@ export default function ShippingPaymentForm(props) {
 
       {/* Form */}
       <div className="ship-pay-form">
-        <form onSubmit={handleSubmit}>
 
-          {/* Payment section */}
+        {/* Payment section */}
+        <form onSubmit={handlePaymentSubmit}>
           <fieldset className="payment">
             <legend>Payment Info</legend>
             <div>
@@ -76,60 +79,76 @@ export default function ShippingPaymentForm(props) {
             </div>
           </fieldset >
 
-          {/* Shipping section */}
+          {/* 'Submit Payment' Button */}
+          <div >
+            <button
+              className="submit-pay-btn">
+              Submit Payment Information</button>
+          </div>
+
+        </form >
+
+        {/* Shipping section */}
+        <form
+        disabled={showPayHideShip}
+        onSubmit={handleShipSubmit}>
           <fieldset className="shipping">
             <legend>Shipping Info</legend>
             <div>
               <label>Name</label>
-                <input
-                  name="shippingName"
-                  type="text"
-                  onChange={handleChange}
-                  value={inputShippingName}
-                />
+              <input
+                name="shippingName"
+                type="text"
+                onChange={handleChange}
+                value={inputShippingName}
+              />
             </div>
             <div>
               <label>Street</label>
-                <input
-                  name="street"
-                  type="text"
-                  onChange={handleChange}
-                  value={inputStreet}
-                />
+              <input
+                name="street"
+                type="text"
+                onChange={handleChange}
+                value={inputStreet}
+              />
             </div>
             <div>
               <label>City</label>
-                <input
-                  name="city"
-                  type="text"
-                  onChange={handleChange}
-                  value={inputCity}
-                />
+              <input
+                name="city"
+                type="text"
+                onChange={handleChange}
+                value={inputCity}
+              />
             </div>
             <div>
               <label>Zip Code</label>
-                <input
-                  name="zip"
-                  type="number"
-                  onChange={handleChange}
-                  value={inputZip}
-                />
+              <input
+                name="zip"
+                type="number"
+                onChange={handleChange}
+                value={inputZip}
+              />
             </div >
             <div>
               <label>State</label>
-                <input
-                  name="state"
-                  type="text"
-                  onChange={handleChange}
-                  value={inputState}
-                />
+              <input
+                name="state"
+                type="text"
+                onChange={handleChange}
+                value={inputState}
+              />
             </div >
           </fieldset >
 
           {/* 'Complete Order' Button */}
           <div >
             <Link to="/confirmation">
-            <button className="complete-order-btn">Complete Order</button>
+              <button
+              value={cart.id}
+              className="complete-order-btn"
+              onClick={handleShipSubmit}
+              >Complete Order</button>
             </Link>
           </div>
 
