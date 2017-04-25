@@ -11,29 +11,31 @@ const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 const loadCart = (req, res, next) => {
   const user = req.user
   if (req.session.cartId) {
+    console.log('Apparently there is req.session.cartId', req.session.cartId)
     Order.scope('populated')
-    .findById(req.session.cartId)
-    .then(order => {
-      // check to see if there is a user -- does Order.getUser() === req.user?
-      // if yes continue as below
-      // else there is now a new user make the user own the order
-      // else if there is a user with a different user id, create a new cart for the new user
-      req.cart = order
-      next()
-    })
+      .findById(req.session.cartId)
+      .then(order => {
+        // check to see if there is a user -- does Order.getUser() === req.user?
+        // if yes continue as below
+        // else there is now a new user make the user own the order
+        // else if there is a user with a different user id, create a new cart for the new user
+        req.cart = order
+        next()
+      })
   } else {
     if (!user) {
-  // we want to create a cart instance and put it on the session for the guest user
-  // we'll move this over to the db once the user logs in
-  Order.scope('populated')
-    .create({status: 'Pending'})
-    .then(cart => {
-      req.cart = cart
-      req.session.cartId = req.cart.id
-      next()
-    })
-    .catch(next)
-    } else {// if there is a user:
+      // we want to create a cart instance and put it on the session for the guest user
+      // we'll move this over to the db once the user logs in
+      console.log('THERE IS NO USER', req.user)
+      Order.scope('populated')
+        .create({ status: 'Pending' })
+        .then(cart => {
+          req.cart = cart
+          req.session.cartId = req.cart.id
+          next()
+        })
+        .catch(next)
+    } else { // if there is a user:
       Order.scope('populated')
         .findOrCreate({
           where: { user_id: user.id, status: 'Pending' },
@@ -60,12 +62,14 @@ module.exports = require('express').Router()
 
   // POST /:productId adds a new item to the cart
   .post('/:productId',
-    (req, res, next) => {
-      req.cart.addProduct(req.params.productId, { quantity: req.body.quantity })
+  (req, res, next) => {
+    console.log('CART', req.cart)
+    req.cart.addProduct(req.params.productId,
+    { quantity: req.body.quantity })
       .then(() => next(), next)
-    },
-    loadCart,
-    (req, res, next) => res.send(req.cart))
+  },
+  loadCart,
+  (req, res, next) => res.send(req.cart))
 
 
   // DELETE /:productId deletes* an item from our cart
@@ -165,7 +169,7 @@ module.exports = require('express').Router()
         })
         .catch(next)
     })
-      // console.log('EACH ORDER ITEM\'S PRODUCT: ', orderItem.dataValues.product)
+    // console.log('EACH ORDER ITEM\'S PRODUCT: ', orderItem.dataValues.product)
     return Address.findOrCreate({
       where: {
         name: req.body.address.name,
