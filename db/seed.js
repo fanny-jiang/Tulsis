@@ -65,7 +65,7 @@ const products = seed(Product, {
     price: 30,
     photoUrl: 'http://nord.imgix.net/Zoom/0/_7493060.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
     quantity: 50,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Infant', 'Toddler']
   },
   booties: {
     title: 'Thea Twinkle Bootie',
@@ -73,7 +73,7 @@ const products = seed(Product, {
     price: 38,
     photoUrl: 'http://nord.imgix.net/Zoom/11/_13050391.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Toddler']
   },
   moc_booties: {
     title: 'Sparrow Boot',
@@ -81,7 +81,7 @@ const products = seed(Product, {
     price: 60,
     photoUrl: 'http://nord.imgix.net/Zoom/10/_10546230.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Infant']
   },
   rain_boots: {
     title: 'Sandor Rain Boot',
@@ -89,7 +89,7 @@ const products = seed(Product, {
     price: 36,
     photoUrl: 'http://nord.imgix.net/Zoom/6/_100768326.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Newborn']
   },
   pink_boots: {
     title: 'Classic Fur Bootie',
@@ -97,7 +97,7 @@ const products = seed(Product, {
     price: 38,
     photoUrl: 'http://nord.imgix.net/Zoom/1/_8257041.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Infant']
   },
   shark_shoes: {
     title: 'Dino Dan Crib Shoe',
@@ -105,7 +105,7 @@ const products = seed(Product, {
     price: 26,
     photoUrl: 'http://nord.imgix.net/Zoom/12/_10243312.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Infant']
   },
   spotty_mocs: {
     title: 'Dalmatian Moccasin',
@@ -113,7 +113,7 @@ const products = seed(Product, {
     price: 49,
     photoUrl: 'http://nord.imgix.net/Zoom/19/_13233279.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Toddler']
   },
   moccasins: {
     title: 'Classic Moccasin',
@@ -121,7 +121,7 @@ const products = seed(Product, {
     price: 60,
     photoUrl: 'http://nord.imgix.net/Zoom/13/_100429853.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Newborn', 'Toddler']
+    category: ['Infant']
   },
   nikes: {
     title: 'Air Max Thea Sneaker',
@@ -145,7 +145,7 @@ const products = seed(Product, {
     price: 35,
     photoUrl: 'http://nord.imgix.net/Zoom/6/_100544226.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
     quantity: 100,
-    category: ['Infant', 'Toddler']    
+    category: ['Infant', 'Toddler']
   },
   adventure_shoes: {
     title: 'Sam Customizable Sneaker',
@@ -153,7 +153,7 @@ const products = seed(Product, {
     price: 50,
     photoUrl: 'http://nord.imgix.net/Zoom/19/_100531579.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 70,
-    category: ['Newborn', 'Infant', 'Toddler']   
+    category: ['Newborn', 'Toddler']
   },
   jellies: {
     title: 'Campana Mary Jane',
@@ -161,7 +161,7 @@ const products = seed(Product, {
     price: 55,
     photoUrl: 'http://nord.imgix.net/Zoom/7/_12130907.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 150,
-    category: ['Newborn', 'Infant', 'Toddler']   
+    category: ['Toddler']
   },
   preppy_sneakers: {
     title: 'Lacoste Evo Sneaker',
@@ -177,7 +177,7 @@ const products = seed(Product, {
     price: 40,
     photoUrl: 'http://nord.imgix.net/Zoom/14/_12120074.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Newborn', 'Infant', 'Toddler']
+    category: ['Newborn']
   }
 })
 
