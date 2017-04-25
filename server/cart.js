@@ -129,7 +129,24 @@ module.exports = require('express').Router()
   // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
   .put('/:orderId/buy',
   (req, res, next) => {
-    Address.findOrCreate({
+    const orderItems = req.cart.dataValues.orderItems
+    orderItems.forEach(orderItem => {
+      const quantityToSubtract = orderItem.dataValues.quantity
+      const quantityToSubtractFrom = orderItem.dataValues.product.quantity
+      const productId = orderItem.dataValues.product.id
+      Product.update(
+        { quantity: quantityToSubtractFrom - quantityToSubtract },
+        {
+          where: { id: productId },
+          returning: true
+        })
+        .then((product) => {
+          console.log('Updated Product quantity', product[1][0].quantity)
+        })
+        .catch(next)
+    })
+      // console.log('EACH ORDER ITEM\'S PRODUCT: ', orderItem.dataValues.product)
+    return Address.findOrCreate({
       where: {
         name: req.body.address.name,
         street: req.body.address.street,
@@ -150,7 +167,6 @@ module.exports = require('express').Router()
           }
         )
           .then((order) => {
-            console.log('THIS SHOULD BE THE CART', order[1][0])
             return res.status(200).send({
               message: 'Checked out',
               cart: order[1][0]
