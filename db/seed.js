@@ -65,7 +65,7 @@ const products = seed(Product, {
     price: 30,
     photoUrl: 'http://nord.imgix.net/Zoom/0/_7493060.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
     quantity: 50,
-    category: ['Infant', 'Toddler']
+    category: ['Infant']
   },
   booties: {
     title: 'Thea Twinkle Bootie',
@@ -129,7 +129,7 @@ const products = seed(Product, {
     price: 55,
     photoUrl: 'http://nord.imgix.net/Zoom/2/_13318742.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 75,
-    category: ['Newborn', 'Toddler']
+    category: ['Newborn']
   },
   sandals: {
     title: 'Sandals',
@@ -137,7 +137,7 @@ const products = seed(Product, {
     price: 36,
     photoUrl: 'http://nord.imgix.net/Zoom/5/_100428605.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Infant', 'Toddler']
+    category: ['Toddler']
   },
   toms: {
     title: 'Chambray Slip-On',
@@ -145,7 +145,7 @@ const products = seed(Product, {
     price: 35,
     photoUrl: 'http://nord.imgix.net/Zoom/6/_100544226.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=860&h=924&q=60',
     quantity: 100,
-    category: ['Infant', 'Toddler']
+    category: ['Toddler']
   },
   adventure_shoes: {
     title: 'Sam Customizable Sneaker',
@@ -153,7 +153,7 @@ const products = seed(Product, {
     price: 50,
     photoUrl: 'http://nord.imgix.net/Zoom/19/_100531579.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 70,
-    category: ['Newborn', 'Toddler']
+    category: ['Newborn']
   },
   jellies: {
     title: 'Campana Mary Jane',
@@ -169,7 +169,7 @@ const products = seed(Product, {
     price: 60,
     photoUrl: 'http://nord.imgix.net/Zoom/13/_100867873.jpg?fit=fill&bg=FFF&fm=jpg&trim=color&trimcolor=FFF&trimtol=20&w=780&h=838&q=60',
     quantity: 100,
-    category: ['Toddler']
+    category: ['Newborn']
   },
   red_grey_sneakers: {
     title: 'Tanner Sneaker',
