@@ -16,7 +16,7 @@ export default function Catalog(props) {
       {/* for later -- responsive layout */}
       { products && products.map(product => (
           <div className="catalog-item" key={product.id}>
-            <Link to={`catalog/${product.id}`}>
+            <Link to={`products/${product.id}`}>
               <img className="catalog-item" src={product.photoUrl} />
               <h4>{product.title}</h4>
               <p>${product.price}.00</p>

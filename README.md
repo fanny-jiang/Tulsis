@@ -1,50 +1,13 @@
-# Hi, I'm bones
+# Hi, I'm Tulsis Baby Shoe Store!
 
-I'm a happy little skeleton. You can clone me to use as a starter on your projects!
-I have React, Redux, Sequelize, and Express all just rattling around in here ready
-to go.
+We have several cute baby shoes here.
+
 
 ## I need node >= 6.7.0
 
-If you don't have it, I'll complain and tell you how to install it.
+If you don't have it, I might not work properly.
 
-## 1. Make me into something!
-
-We recommend that you **clone**, not fork, this repo – unless your intention is
-to develop Bones proper instead of using Bones as the starting point for your
-own application.
-
-Start by doing either of the following:
-
-* Create a GitHub repo and clone it, or
-* `git init` in an empty directory on your machine.
-
-After you have a repo on your machine:
-
-```sh
-git remote add bones https://github.com/FullstackAcademy/bones.git
-git fetch bones
-git merge bones/master
-```
-
-And then you'll have me! If I change – which I probably will – you can get the most recent
-version by doing this again:
-
-```sh
-git fetch bones
-git merge bones/master
-```
-
-## 2. I need a name.
-
-I don't have a name. I think I used to have one, but it turned to dust right along with my
-heart and liver and pituitary gland and all that stuff.
-
-Anyway, I'll need one. Give me a name in `package.json`.
-
-## 3. Start my dusty heart
-
-Short and sweet:
+## 2. Copy me!
 
 ```sh
 npm install

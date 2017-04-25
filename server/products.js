@@ -33,7 +33,10 @@ module.exports = require('express').Router()
   .get('/:id',
   (req, res, next) =>
     Product.findById(req.params.id)
-      .then(product => res.json(product))
+      .then(product => {
+        console.log("IN API ROUTE FOR PRODUCTID: ", product)
+        res.json(product)
+      })
       .catch(next))
 
   // POST - create new product instance
