@@ -9,6 +9,13 @@ const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
 const loadCart = (req, res, next) => {
   const user = req.user
+  if (req.session.cartId) {
+    // Load this cart
+  } else {
+    // Create a cart and put its ID on req.session.cartId
+    // If a user is logged in, maybe grab their most recent pending order.
+  }
+
   if (!user) {
   // we want to create a cart instance and put it on the session for the guest user
   // we'll move this over to the db once the user logs in

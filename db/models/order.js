@@ -23,5 +23,4 @@ module.exports.associations = (Order, {Product, User, OrderItem, Payment, Addres
   Order.belongsTo(Address)
   Order.OrderItem = OrderItem
   Order.hasMany(OrderItem)
-
 }
