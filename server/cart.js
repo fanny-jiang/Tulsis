@@ -7,25 +7,6 @@ const Product = db.model('products')
 const User = db.model('users') // for orders by a user
 const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
-const loadCart = (req, res, next) => {
-  const user = req.user
-  if (!user) {
-    next()
-  } else {
-    Order.scope('populated')
-      .findOrCreate({
-        where: { user_id: user.id, status: 'Pending' },
-        defaults: { user_id: user.id, status: 'Pending' },
-        // include: [ User ]
-      })
-      .then(cart => {
-        req.cart = cart[0]
-        next()
-      })
-      .catch(next)
-  }
-}
-
 module.exports = require('express').Router()
   .use(loadCart)
   // GET / sends back the cart, which is an instance of Order
@@ -145,3 +126,23 @@ module.exports = require('express').Router()
   })
 
   // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'
+function loadCart(req, res, next) {
+  const user = req.user
+  if (!user) {
+    next()
+  } else {
+    Order.scope('populated')
+      .findOrCreate({
+        where: { user_id: user.id, status: 'Pending' },
+        defaults: { user_id: user.id, status: 'Pending' },
+        // include: [ User ]
+      })
+      .then(cart => {
+        req.cart = cart[0]
+        next()
+      })
+      .catch(next)
+  }
+}
+
+module.exports.loadCart = loadCart

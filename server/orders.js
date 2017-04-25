@@ -6,6 +6,7 @@ const Address = db.model('addresses')
 const OrderItem = db.model('orderItems')
 const User = db.model('users') // for orders by a user
 const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
+const {loadCart} = require('./cart')
 
 module.exports = require('express').Router()
   .get('/',
@@ -54,33 +55,29 @@ module.exports = require('express').Router()
       .catch(next))
 
   // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
+  // TODO: Move this to the cart API.
   .put('/:orderId/buy',
-  (req, res, next) => {
-    console.log('REQ.BODY', req.body)
-    Address.findOrCreate({
-      where: {
-        street: req.body.address.street
-      },
-      defaults: {
-        address: req.body.address
-      }
-    })
+    (req, res, next) => {
+      console.log('REQ.BODY', req.body)
+      Address.findOrCreate({
+        where: req.body.address,
+        defaults: req.body.address,
+      })
       .then(returnVal => {
         console.log("ADDRESS IN PUT ROUTE FOR ORDER: ", returnVal[0])
         const address = returnVal[0]
-        Order.update({ status: 'Completed', address_id: address.id },
-          { where: { id: req.params.orderId } },
-          { returning: true })
-          .then((order) => {
-            console.log('HERE IS THE ORDER/CART', order)
-            res.status(204).send({
-              message: 'Cart checked out',
-              cart: order
-            })
-          })
-          .catch(next)
+        return Order.scope('populated')
+          .update({ status: 'Completed', address_id: address.id },
+          { where: { id: req.params.orderId } })
       })
-  })
+      .then(() => next())
+      .catch(next)
+    }, loadCart, (req, res, next) => {
+      res.status(204).send({
+        message: 'Cart checked out',
+        cart: req.cart
+      })
+    })
 
       // PUT route to update an order from the request body
       .put('/:id',

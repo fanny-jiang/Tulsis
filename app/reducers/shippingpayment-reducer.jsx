@@ -1,5 +1,7 @@
 import { RECEIVE_SPINFO } from '../constants'
 
+// TODO: When there's only one thing in initialState,
+// you can go flatter.
 const initialState = {
   spInfo: {}
 }
