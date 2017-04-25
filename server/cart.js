@@ -4,6 +4,7 @@ const db = require('APP/db')
 const Order = db.model('orders')
 const OrderItem = db.model('orderItems')
 const Product = db.model('products')
+const Address = db.model('addresses')
 const User = db.model('users') // for orders by a user
 const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
@@ -87,10 +88,6 @@ module.exports = require('express').Router()
         return item.update(
           { quantity: item.quantity + 1 },
           { returning: true })
-        //  Eventually move this update to the checkout portion
-        // .then(item => {
-        //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
-        // })
       })
       .then(() => next())
       .catch(next)
@@ -128,20 +125,43 @@ module.exports = require('express').Router()
     })
   })
 
-  // PUT /:productId changes the quantity of an item in cart
-  // We don't need this for the cart view -- do we need it anywhere else?
-  .put('/:productId',
+
+  // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
+  .put('/:orderId/buy',
   (req, res, next) => {
-    req.cart.update(
-      { quantity: req.body.quantity },
-      { model: OrderItem },
-      { where: { product_id: req.params.productId } },
-      { returning: true })
-      .then(orderItem => res.send({
-        message: 'Modified quantity',
-        item: orderItem[1][0]
-      }))
-      .catch(next)
+    Address.findOrCreate({
+      where: {
+        name: req.body.address.name,
+        street: req.body.address.street,
+        city: req.body.address.city,
+        zip: +req.body.address.zip,
+        state: req.body.address.state
+      },
+      defaults: {
+        address: req.body.address
+      }
+    })
+      .then(returnVal => {
+        const address = returnVal[0]
+        Order.update({ status: 'Completed', address_id: address.id },
+          {
+            where: { id: req.params.orderId },
+            returning: true
+          }
+        )
+          .then((order) => {
+            console.log('THIS SHOULD BE THE CART', order[1][0])
+            return res.status(200).send({
+              message: 'Checked out',
+              cart: order[1][0]
+            })
+          }).catch(next)
+      }).catch(next)
   })
 
-  // This warning is generated and implies we are missing a return statement, but does not impede the app: 'Warning: a promise was created in a handler at Users/maria/Desktop/GraceHopper/Tulsis/node_modules/express/lib/router/index.js:280:7 but was not returned from it, see http://goo.gl/rRqMUw'
+        //  Eventually move this update to the checkout portion
+        // .then(item => {
+        //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
+        // })
+
+

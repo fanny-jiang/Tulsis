@@ -34,10 +34,9 @@ class ShippingPaymentFormContainer extends Component {
   }
   handleShipSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewSPInfo(this.state)
-    // we need to interpolate orderId
-    // console.log('EVT STUFF', evt.target.value)
-    axios.put(`/api/orders/${evt.target.value}/buy`,
+    // console.log('ORDER-ID FROM SHIP CONTAINER', evt.target.value)
+    this.props.addNewSPInfo(this.state, evt.target.value)
+    axios.put(`/api/cart/${evt.target.value}/buy`,
       {
         address: {
           street: this.state.street,
@@ -47,7 +46,7 @@ class ShippingPaymentFormContainer extends Component {
         }
       })
       .then(res => {
-        console.log('RES.DATA: ', res.data)
+        console.log('RES: ', res)
         store.dispatch(updateCart(res.data.cart))
       })
       .catch(err => console.error('Cannot complete order', err))
@@ -55,7 +54,7 @@ class ShippingPaymentFormContainer extends Component {
 
   handlePaymentSubmit(evt) {
     evt.preventDefault()
-    this.props.addNewSPInfo(this.state)
+    this.props.addNewSPInfo(this.state, evt.target.value)
     console.log('Here is the state', this.state)
     this.setState({
       paymentName: '',
@@ -96,14 +95,13 @@ class ShippingPaymentFormContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewSPInfo(state) {
-      dispatch(addNewSPInfo(state))
+    addNewSPInfo(state, orderId) {
+      dispatch(addNewSPInfo(state, orderId))
     }
   }
 }
 
 const mapState = (state) => {
-  // console.log('STATE FROM CONTAINER', state)
   return {
     cart: state.cart
   }

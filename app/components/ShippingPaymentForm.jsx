@@ -17,7 +17,6 @@ export default function ShippingPaymentForm(props) {
   const inputZip = props.zip
   const inputState = props.state
   let showPayHideShip = false
-  console.log('PROPS FROM PAYMENT FORM', props)
 
   return (
     <div className="main-container">

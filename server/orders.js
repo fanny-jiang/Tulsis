@@ -53,34 +53,6 @@ module.exports = require('express').Router()
       .then(order => res.json(order))
       .catch(next))
 
-  // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
-  .put('/:orderId/buy',
-  (req, res, next) => {
-    console.log('REQ.BODY', req.body)
-    Address.findOrCreate({
-      where: {
-        street: req.body.address.street
-      },
-      defaults: {
-        address: req.body.address
-      }
-    })
-      .then(returnVal => {
-        console.log("ADDRESS IN PUT ROUTE FOR ORDER: ", returnVal[0])
-        const address = returnVal[0]
-        Order.update({ status: 'Completed', address_id: address.id },
-          { where: { id: req.params.orderId } },
-          { returning: true })
-          .then((order) => {
-            console.log('HERE IS THE ORDER/CART', order)
-            res.status(204).send({
-              message: 'Cart checked out',
-              cart: order
-            })
-          })
-          .catch(next)
-      })
-  })
 
       // PUT route to update an order from the request body
       .put('/:id',
