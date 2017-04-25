@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 
 export default function ShippingPaymentForm(props) {
+  const cart = props.cart
   const handleChange = props.handleChange
   const handlePaymentSubmit = props.handlePaymentSubmit
   const handleShipSubmit = props.handleShipSubmit
@@ -16,6 +17,7 @@ export default function ShippingPaymentForm(props) {
   const inputZip = props.zip
   const inputState = props.state
   let showPayHideShip = false
+  console.log('PROPS FROM PAYMENT FORM', props)
 
   return (
     <div className="main-container">
@@ -88,7 +90,9 @@ export default function ShippingPaymentForm(props) {
         </form >
 
         {/* Shipping section */}
-        <form disabled={showPayHideShip} onSubmit={handleShipSubmit}>
+        <form
+        disabled={showPayHideShip}
+        onSubmit={handleShipSubmit}>
           <fieldset className="shipping">
             <legend>Shipping Info</legend>
             <div>
@@ -141,7 +145,11 @@ export default function ShippingPaymentForm(props) {
           {/* 'Complete Order' Button */}
           <div >
             <Link to="/confirmation">
-              <button className="complete-order-btn">Complete Order</button>
+              <button
+              value={cart.id}
+              className="complete-order-btn"
+              onClick={handleShipSubmit}
+              >Complete Order</button>
             </Link>
           </div>
 

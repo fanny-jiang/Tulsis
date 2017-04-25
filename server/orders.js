@@ -56,6 +56,7 @@ module.exports = require('express').Router()
   // PUT route to complete an order, should also take care of shipping and payment information that comes from req.body
   .put('/:orderId/buy',
   (req, res, next) => {
+    console.log('REQ.BODY', req.body)
     Address.findOrCreate({
       where: {
         street: req.body.address.street
@@ -64,67 +65,73 @@ module.exports = require('express').Router()
         address: req.body.address
       }
     })
-    .then(returnVal => {
-      console.log("IN PUT ROUTE FOR ORDER: ", returnVal)
-      const address = returnVal[0]
-      Order.update({ status: 'Completed', address_id: address.id },
-      { where: { id: req.params.orderId } },
-      { returning: true })
-      .then(() => res.sendStatus(204))
-    })
-      .catch(next)
+      .then(returnVal => {
+        console.log("IN PUT ROUTE FOR ORDER: ", returnVal)
+        const address = returnVal[0]
+        Order.update({ status: 'Completed', address_id: address.id },
+          { where: { id: req.params.orderId } },
+          { returning: true })
+          .then((order) => {
+            console.log('HERE IS THE ORDER/CART', order)
+            res.status(204).send({
+              message: 'Cart checked out',
+              cart: order
+            })
+          })
+          .catch(next)
+      })
   })
 
-  // PUT route to update an order from the request body
-  .put('/:id',
-  (req, res, next) =>
-    Order.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-      returning: true,
-    })
-      .then((allReturned) =>
-        allReturned[1][0]
+      // PUT route to update an order from the request body
+      .put('/:id',
+      (req, res, next) =>
+        Order.update(req.body, {
+          where: {
+            id: req.params.id,
+          },
+          returning: true,
+        })
+          .then((allReturned) =>
+            allReturned[1][0]
+          )
+          .then(updatedOrder => {
+            if (updatedOrder === undefined) {
+              res.status(500)
+              next()
+            } else {
+              res.send(updatedOrder)
+            }
+          })
+          .catch(next)
       )
-      .then(updatedOrder => {
-        if (updatedOrder === undefined) {
-          res.status(500)
-          next()
-        } else {
-          res.send(updatedOrder)
-        }
-      })
-      .catch(next)
-  )
-  // PUT route to add an order item to an order from the request body
-  // .put('/:id/items/:itemId',
-  // (req, res, next) =>
-  // OrderItem.create({
-  //get the product id
-  //get product quantity  from req.body
-  //create an orderItem
-  //current problem is we have an order_item_id on the product table - we want this in a separate table
-  // })
-  // )
+      // PUT route to add an order item to an order from the request body
+      // .put('/:id/items/:itemId',
+      // (req, res, next) =>
+      // OrderItem.create({
+      //get the product id
+      //get product quantity  from req.body
+      //create an orderItem
+      //current problem is we have an order_item_id on the product table - we want this in a separate table
+      // })
+      // )
 
 
-  // DELETE route to remove an order
-  .delete('/:id', (req, res, next) =>
-    Order.destroy({
-      where: {
-        id: req.params.id,
-      }
-    })
-      .then((result) => {
-        if (result === 0) {
-          res.sendStatus(404)
-        } else {
-          res.sendStatus(204)
-        }
-      })
-      .catch(next)
-  )
+      // DELETE route to remove an order
+      .delete('/:id', (req, res, next) =>
+        Order.destroy({
+          where: {
+            id: req.params.id,
+          }
+        })
+          .then((result) => {
+            if (result === 0) {
+              res.sendStatus(404)
+            } else {
+              res.sendStatus(204)
+            }
+          })
+          .catch(next)
+      )
 
 
 // TODOS
