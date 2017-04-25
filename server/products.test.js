@@ -46,7 +46,7 @@ describe('/api/products', () => {
   })
 
   describe('POST', () =>
-    it('creates a product', () =>
+    xit('creates a product', () =>
       request(app)
         .post('/api/products')
         .send({
@@ -86,23 +86,6 @@ describe('/api/products', () => {
   }
   )
 
-  // describe('DELETE', () =>
-  //   describe('only admin can delete a product', () => {
-  //     before('Creates a product', () =>
-  //       request(app)
-  //         .post('/api/products')
-  //         .send({
-  //           title: 'deleteMe',
-  //           price: 500
-  //         }))
-  //     it('deletes a product', () =>
-  //       request(app)
-  //         .delete('/api/products')
-  //         .send({
-  //           title: 'booties',
-  //           price: 12
-  //         })
-  //         .expect(201))
 })
 // TODOS-tests
 // GET
