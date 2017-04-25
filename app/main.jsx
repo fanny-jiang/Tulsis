@@ -83,8 +83,8 @@ render(
           <Route path="/orders" component={OrderHistory} />
         </Route>
         <Route path="admin/:userId" component={Admin} />
+              <IndexRedirect to='catalog'/>
       </Route>
-      <Route path='*' component={NotFound} />
     </Router>
   </Provider>,
   document.getElementById('main')
