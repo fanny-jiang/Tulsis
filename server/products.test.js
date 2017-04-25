@@ -23,7 +23,9 @@ describe('/api/products', () => {
 
     before(() => {
       return Product.create({
-        title: 'Test Shoes'
+        title: 'Test Shoes',
+        price: 1,
+        quantity: 1
       })
         .then(product => {
           // console.log('We made a product', product)
@@ -46,12 +48,13 @@ describe('/api/products', () => {
   })
 
   describe('POST', () =>
-    xit('creates a product', () =>
+    it('creates a product', () =>
       request(app)
         .post('/api/products')
         .send({
           title: 'booties',
-          price: 12
+          price: 12,
+          quantity: 1
         })
         .expect(201)
     ))
@@ -61,7 +64,8 @@ describe('/api/products', () => {
     before(() => {
       return Product.create({
         title: 'booties',
-        price: 12
+        price: 12,
+        quantity: 1
       })
         .then(product => {
           // console.log('We made a product', product)

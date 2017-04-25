@@ -49,8 +49,7 @@ describe('Product', () => {
         .then(err => {
           expect(err).to.be.an('object')
           expect(err.errors).to.contain.a.thing.with.properties({
-            path: 'title',
-            type: 'notNull Violation'
+            path: 'title'
           })
         })
     })
