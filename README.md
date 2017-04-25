@@ -1,13 +1,13 @@
-# Hi, I'm Tulsis Baby Shoe Store!
+# Tulsi's Baby Shoe Store
 
-We have several cute baby shoes here.
+E-commerce web app selling cute baby shoes. Built at Grace Hopper Program 1702-NY.
 
+## Pre-requisites
 
-## I need node >= 6.7.0
+**node >= 6.7.0**
+If you don't have it, I might not work properly :(
 
-If you don't have it, I might not work properly.
-
-## 2. Copy me!
+## Installing
 
 ```sh
 npm install
@@ -28,7 +28,7 @@ npm run build-dev
 
 In two separate terminals. The vanilla `npm start` is for production — you won't use it in development!
 
-## My anatomy
+## Contents
 
 `/app` has the React/Redux setup. `main.jsx` is the entry point.
 
@@ -37,7 +37,7 @@ assuming you're using postgres.
 
 `/server` has the Express server and routes. `start.js` is the entry point.
 
-`/bin` has scripts. (Right now it has *one* script that creates a useful symlink.)
+`/bin` has scripts.
 
 ## Conventions
 
@@ -45,8 +45,7 @@ I use `require` and `module.exports` in `.js` files.
 
 I use `import` and `export` in `.jsx` files, unless `require` makes for cleaner code.
 
-I use two spaces, no semi-colons, and trailing commas where possible. I'll
-have a linter someday soon.
+I use two spaces, no semi-colons, and trailing commas where possible. I come with eslint.
 
 ## Quick Heroku deployment
 
@@ -65,3 +64,40 @@ have a linter someday soon.
 Afterwards,
   - *To deploy:* `npm run deploy-heroku`
   - *To re-seed:* `heroku run npm run seed`
+
+## Running the tests
+
+```sh
+npm run test
+npm run test-watch
+```
+
+The `/-watch` script watches the files for changes
+
+
+## Built With
+
+**React.js**
+**React-Redux**
+**PostgresQL**
+**Node.js/Express.js**
+
+
+## Authors
+
+**[Christiane (Tina) Heiligers](https://github.com/TinaHeiligers)**
+**[Fanny Jiang](https://github.com/fanny-jiang)**
+**[Maria Schreiber](https://github.com/Meschreiber)**
+**[Stefanie Sundby](https://github.com/ssundby)**
+
+## Acknowledgements
+
+### Instructors
+**[Ashi Krishnan]()**
+**[Ben Cohen]()**
+
+### Fellow
+**[Mariana Templin](https://github.com/goldienova)**
+
+### Last but not least...
+**Tulsi, _our store's namesake_**
