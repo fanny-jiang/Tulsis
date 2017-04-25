@@ -9,23 +9,31 @@ const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
 const loadCart = (req, res, next) => {
   const user = req.user
-  if (!user) {
+  if (req.session.cartId) {//here we assume there is a cartId on the session
+    Order.findById(req.session.cartId)
+    .then(order => {
+      req.cart = order
+      next()
+    })
+  } else {
+    if (!user) {
   // we want to create a cart instance and put it on the session for the guest user
   // we'll move this over to the db once the user logs in
-    req.session.cart = {status: 'Pending', items: []}
-    next()
-  } else {
-    Order.scope('populated')
-      .findOrCreate({
-        where: { user_id: user.id, status: 'Pending' },
-        defaults: { user_id: user.id, status: 'Pending' },
-        // include: [ User ]
-      })
-      .then(cart => {
-        req.cart = cart[0]
-        next()
-      })
-      .catch(next)
+      next()
+    } else {// if there is a user:
+      Order.scope('populated')
+        .findOrCreate({
+          where: { user_id: user.id, status: 'Pending' },
+          defaults: { user_id: user.id, status: 'Pending' },
+          // include: [ User ]
+        })
+        .then(cart => {
+          req.cart = cart[0]
+          req.session.cartId = req.cart.id
+          next()
+        })
+        .catch(next)
+    }
   }
 }
 
