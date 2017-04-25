@@ -73,6 +73,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
+        <IndexRedirect to="/catalog" />
         <Route path="confirmation" component={OrderConfirmation}/>
         <Route path="cart" component={CartContainer} onEnter={onCartEnter}/>
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />

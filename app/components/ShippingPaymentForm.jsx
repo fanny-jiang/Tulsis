@@ -46,6 +46,7 @@ export default function ShippingPaymentForm(props) {
               <label>Credit Card Type</label>
               <input
                 name="ccType"
+                // Maybe see if there's a type for this in particular?
                 type="text"
                 onChange={handleChange}
                 value={inputccType}
@@ -72,6 +73,7 @@ export default function ShippingPaymentForm(props) {
             <div>
               <label>Expiration Date</label>
               <input
+                // Only MM/YY
                 name="expiry"
                 type="date"
                 onChange={handleChange}
@@ -91,7 +93,7 @@ export default function ShippingPaymentForm(props) {
 
         {/* Shipping section */}
         <form
-        disabled={showPayHideShip}
+        style={{display: showPayHideShip ? 'none' : 'block'}}
         onSubmit={handleShipSubmit}>
           <fieldset className="shipping">
             <legend>Shipping Info</legend>

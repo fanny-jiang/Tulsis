@@ -22,21 +22,25 @@ class ShippingPaymentFormContainer extends Component {
       zip: '',
       state: ''
     }
-    this.handleChange = this.handleChange.bind(this)
+    // Don't need to bind with class properties
+    // this.handleChange = this.handleChange.bind(this)
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
-    this.handleShipSubmit = this.handleShipSubmit.bind(this)
+    this.handleShipSubmit = this.handleShipSubmit.bind(this)    
   }
 
-  handleChange(evt) {
+  // You can use class properties syntax!
+  handleChange = (evt) => {
     this.setState({
       [evt.target.name]: evt.target.value
     })
   }
+
   handleShipSubmit(evt) {
     evt.preventDefault()
     this.props.addNewSPInfo(this.state)
     // we need to interpolate orderId
     // console.log('EVT STUFF', evt.target.value)
+    // TODO: change to /api/cart/buy
     axios.put(`/api/orders/${evt.target.value}/buy`,
       {
         address: {
