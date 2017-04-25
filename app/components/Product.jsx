@@ -24,7 +24,8 @@ export default function Product(props) {
       {/* Add to cart button */}
       <button onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
 
-      {/* Reviews go here */}
+    {/* Reviews go here */}
+    <p> Click <Link to={`catalog`}>here </Link> to continue shopping. </p>
 
     </div>
   )
