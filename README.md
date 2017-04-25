@@ -28,6 +28,13 @@ npm run build-dev
 
 In two separate terminals. The vanilla `npm start` is for production — you won't use it in development!
 
+## Running the tests
+
+```sh
+npm run test
+npm run test-watch
+```
+
 ## Contents
 
 `/app` has the React/Redux setup. `main.jsx` is the entry point.
@@ -65,15 +72,7 @@ Afterwards,
   - *To deploy:* `npm run deploy-heroku`
   - *To re-seed:* `heroku run npm run seed`
 
-## Running the tests
-
-```sh
-npm run test
-npm run test-watch
-```
-
-The `/-watch` script watches the files for changes
-
+The `watch` script watches the files for changes
 
 ## Built With
 
@@ -81,7 +80,6 @@ The `/-watch` script watches the files for changes
 **React-Redux**
 **PostgresQL**
 **Node.js/Express.js**
-
 
 ## Authors
 
@@ -92,12 +90,12 @@ The `/-watch` script watches the files for changes
 
 ## Acknowledgements
 
-### Instructors
-**[Ashi Krishnan]()**
-**[Ben Cohen]()**
+**Instructors**
+-[Ashi Krishnan](https://github.com/queerviolet)
+-Ben Cohen
 
-### Fellow
-**[Mariana Templin](https://github.com/goldienova)**
+**Teaching Fellow**
+-[Mariana Templin](https://github.com/goldienova)
 
-### Last but not least...
-**Tulsi, _our store's namesake_**
+**Last but not least...**
+-Tulsi, _our store's namesake_
