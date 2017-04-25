@@ -124,6 +124,7 @@ passport.use(new (require('passport-local').Strategy)(
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
+// //add middleware to transfer cart from session to db
 auth.post('/login/local', passport.authenticate('local', {successRedirect: '/'}))
 
 // GET requests for OAuth login:

@@ -10,6 +10,9 @@ const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 const loadCart = (req, res, next) => {
   const user = req.user
   if (!user) {
+  // we want to create a cart instance and put it on the session for the guest user
+  // we'll move this over to the db once the user logs in
+    req.session.cart = {status: 'Pending', items: []}
     next()
   } else {
     Order.scope('populated')
@@ -39,14 +42,25 @@ module.exports = require('express').Router()
   // NOTE: this is untested -- don't know how to test this in Postman
   .post('/:productId',
   (req, res, next) => {
-    Product.findById(req.params.productId)
-      .then(product => {
-        req.cart.addProduct(product,
-          { quantity: req.body.quantity })
+    if (req.user) {
+  Product.findById(req.params.productId)
+    .then(product => {
+      req.cart.addProduct(product,
+        { quantity: req.body.quantity })
         return req.cart
       })
       .then(order => res.send(order))
       .catch(next)
+      } else {
+        Product.findById(req.params.productId)
+        .then(product => {
+          console.log("IN POST WHAT IS THE PRODUCT?: ", product)
+          req.session.cart.items.push(product, {quantity: req.body.quantity})
+          console.log("IN post route for session cart: ", req.session.cart)
+          res.send(req.session.cart)//need to send this back to the cart view
+        })
+      .catch(next)
+      }
   })
 
   // DELETE /:productId deletes* an item from our cart
