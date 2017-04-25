@@ -66,7 +66,7 @@ module.exports = require('express').Router()
       }
     })
       .then(returnVal => {
-        console.log("IN PUT ROUTE FOR ORDER: ", returnVal)
+        console.log("ADDRESS IN PUT ROUTE FOR ORDER: ", returnVal[0])
         const address = returnVal[0]
         Order.update({ status: 'Completed', address_id: address.id },
           { where: { id: req.params.orderId } },
