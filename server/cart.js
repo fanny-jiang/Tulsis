@@ -10,20 +10,43 @@ const { mustBeLoggedIn, forbidden, selfOnly } = require('./auth.filters')
 
 const loadCart = (req, res, next) => {
   const user = req.user
-  if (!user) {
-    next()
-  } else {
+  if (req.session.cartId) {
     Order.scope('populated')
-      .findOrCreate({
-        where: { user_id: user.id, status: 'Pending' },
-        defaults: { user_id: user.id, status: 'Pending' },
-        // include: [ User ]
-      })
-      .then(cart => {
-        req.cart = cart[0]
-        next()
-      })
-      .catch(next)
+    .findById(req.session.cartId)
+    .then(order => {
+      // check to see if there is a user -- does Order.getUser() === req.user?
+      // if yes continue as below
+      // else there is now a new user make the user own the order
+      // else if there is a user with a different user id, create a new cart for the new user
+      req.cart = order
+      next()
+    })
+  } else {
+    if (!user) {
+  // we want to create a cart instance and put it on the session for the guest user
+  // we'll move this over to the db once the user logs in
+  Order.scope('populated')
+    .create({status: 'Pending'})
+    .then(cart => {
+      req.cart = cart
+      req.session.cartId = req.cart.id
+      next()
+    })
+    .catch(next)
+    } else {// if there is a user:
+      Order.scope('populated')
+        .findOrCreate({
+          where: { user_id: user.id, status: 'Pending' },
+          defaults: { user_id: user.id, status: 'Pending' },
+          // include: [ User ]
+        })
+        .then(cart => {
+          req.cart = cart[0]
+          req.session.cartId = req.cart.id
+          next()
+        })
+        .catch(next)
+    }
   }
 }
 
@@ -36,19 +59,14 @@ module.exports = require('express').Router()
   )
 
   // POST /:productId adds a new item to the cart
-  // We assume that req.body will include item quantity
-  // NOTE: this is untested -- don't know how to test this in Postman
   .post('/:productId',
-  (req, res, next) => {
-    Product.findById(req.params.productId)
-      .then(product => {
-        req.cart.addProduct(product,
-          { quantity: req.body.quantity })
-        return req.cart
-      })
-      .then(order => res.send(order))
-      .catch(next)
-  })
+    (req, res, next) => {
+      req.cart.addProduct(req.params.productId, { quantity: req.body.quantity })
+      .then(() => next(), next)
+    },
+    loadCart,
+    (req, res, next) => res.send(req.cart))
+
 
   // DELETE /:productId deletes* an item from our cart
   .delete('/:productId',
@@ -130,6 +148,7 @@ module.exports = require('express').Router()
   .put('/:orderId/buy',
   (req, res, next) => {
     const orderItems = req.cart.dataValues.orderItems
+    // Promise.map
     orderItems.forEach(orderItem => {
       const quantityToSubtract = orderItem.dataValues.quantity
       const quantityToSubtractFrom = orderItem.dataValues.product.quantity
@@ -168,6 +187,7 @@ module.exports = require('express').Router()
           }
         )
           .then((order) => {
+            delete req.session.cartId
             return res.status(200).send({
               message: 'Checked out',
               cart: order[1][0]
@@ -175,10 +195,4 @@ module.exports = require('express').Router()
           }).catch(next)
       }).catch(next)
   })
-
-        //  Eventually move this update to the checkout portion
-        // .then(item => {
-        //   Product.update({quantity: productInventory - 1}, {where: {id: req.params.productId}})
-        // })
-
 
