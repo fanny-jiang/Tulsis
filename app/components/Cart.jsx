@@ -58,6 +58,7 @@ export default class Cart extends Component {
 
   render() {
     const cart = this.props.cart || [] // cart component is rendering before props had been received; set cart to empty array by default so that code doesn't break when it renders the first time around
+    let subtotal = this.orderTotal(cart)
 
     return (
       <div className="main-container">
@@ -122,7 +123,7 @@ export default class Cart extends Component {
             <tbody>
               <tr>
                 <td className="label">Subtotal</td>
-                <td>${this.orderTotal(cart)}.00</td>
+                <td>${subtotal}.00</td>
               </tr>
             </tbody>
           </table>
@@ -131,7 +132,10 @@ export default class Cart extends Component {
         {/* Checkout button */}
         <div className="checkout-btn clear">
           <form action="/cart/checkout">
-            <input type="submit" value="Checkout" />
+            <input
+            type="submit"
+            value="Checkout"
+            disabled={subtotal === 0}/>
           </form>
         </div>
 
