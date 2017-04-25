@@ -121,10 +121,19 @@ export default class Cart extends Component {
         <div className="price-table clear">
           <table>
             <tbody>
-              <tr>
-                <td className="label">Subtotal</td>
-                <td>${subtotal}.00</td>
-              </tr>
+              
+                {(subtotal === 0)
+                  ? (<tr>
+                  <h5 className="label"> You don't have anything in your cart! </h5>
+                  <p> Click <Link to={`catalog`}>here </Link> to continue shopping. </p>
+                    </tr>)
+                  : (
+                    <tr>
+                    <td className="label">Subtotal</td>
+                    <td>${subtotal}.00</td>
+                    </tr>)
+                  }
+              
             </tbody>
           </table>
         </div>
@@ -133,9 +142,9 @@ export default class Cart extends Component {
         <div className="checkout-btn clear">
           <form action="/cart/checkout">
             <input
-            type="submit"
-            value="Checkout"
-            disabled={subtotal === 0}/>
+              type="submit"
+              value="Checkout"
+              disabled={subtotal === 0} />
           </form>
         </div>
 

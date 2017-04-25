@@ -41,19 +41,19 @@ const onAppEnter = () => {
   get('/api/cart', receiveCart)
 }
 
-const onProductEnter = function(nextRouterState) {
+const onProductEnter = function (nextRouterState) {
 
   const productId = nextRouterState.params.productId
   store.dispatch(getProductById(productId))
 }
 
-const onCartEnter = function() {
+const onCartEnter = function () {
   get('/api/cart', receiveCart)
 }
 
 
 //possiblity to reuse the catalogue container and component, just with different props.
-const onCategoryEnter = function(nextRouterState) {
+const onCategoryEnter = function (nextRouterState) {
   const categoryName = nextRouterState.params.categoryName
   store.dispatch(getProductsByCategory(categoryName))
 }
@@ -73,17 +73,17 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={onAppEnter}>
-        <Route path="confirmation" component={OrderConfirmation}/>
-        <Route path="cart" component={CartContainer} onEnter={onCartEnter}/>
+        <Route path="confirmation" component={OrderConfirmation} />
+        <Route path="cart" component={CartContainer} onEnter={onCartEnter} />
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
-        <Route path="catalog" component={CatalogContainer} onEnter={onAppEnter}/>
-        <Route path="catalog/:categoryName" component={CatalogContainer} onEnter={onCategoryEnter}/>
+        <Route path="catalog" component={CatalogContainer} onEnter={onAppEnter} />
+        <Route path="catalog/:categoryName" component={CatalogContainer} onEnter={onCategoryEnter} />
         <Route path="products/:productId" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="user/:userId" component={User}>
           <Route path="/orders" component={OrderHistory} />
         </Route>
         <Route path="admin/:userId" component={Admin} />
-              <IndexRedirect to='catalog'/>
+        <IndexRedirect to='catalog' />
       </Route>
     </Router>
   </Provider>,
