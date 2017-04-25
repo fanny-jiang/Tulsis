@@ -78,7 +78,7 @@ render(
         <Route path="cart/checkout" component={ShippingPaymentFormContainer} />
         <Route path="catalog" component={CatalogContainer} onEnter={onAppEnter}/>
         <Route path="catalog/:categoryName" component={CatalogContainer} onEnter={onCategoryEnter}/>
-        <Route path="catalog/:productId" component={ProductContainer} onEnter={onProductEnter} />
+        <Route path="products/:productId" component={ProductContainer} onEnter={onProductEnter} />
         <Route path="user/:userId" component={User}>
           <Route path="/orders" component={OrderHistory} />
         </Route>
