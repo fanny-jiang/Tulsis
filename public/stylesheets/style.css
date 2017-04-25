@@ -213,12 +213,15 @@ button {
     .shipping label {
         float: left;
         font-size: 0.9em; }
-    .payment label { 
+    .payment label {
+      margin: 10px; 
         width: 20%; }
-    .shipping label { 
+    .shipping label {
+      margin: 10px; 
         width: 10%; }
     .payment input,
     .shipping input {
+      margin: 10px;
         width: 25%; }
 
 .complete-order-btn {
