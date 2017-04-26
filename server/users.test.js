@@ -34,7 +34,6 @@ describe('/api/users', () => {
     })
 
     it('updates a user', () => {
-      // Why does this complete before the 'before' block completes?
       console.log('Were searching for user', id)
       request(app)
         .put(`/api/users/${id}`)
@@ -50,7 +49,6 @@ describe('/api/users', () => {
         })
         .catch(console.error)
     }
-
     )
 
     describe('POST', () =>
@@ -91,8 +89,6 @@ describe('/api/users', () => {
           .catch(console.error)
       })
       it('deletes a user', () => {
-        // Why does this complete before the 'before' block completes?
-        console.log('Were searching for user', id)
         request(app)
           .delete(`/api/users/${id}`)
           .expect(204)

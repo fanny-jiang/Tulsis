@@ -11,7 +11,7 @@ describe('/api/products', () => {
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
   describe('GET /', () =>
-    describe('when there are or are not products', () =>
+    describe('responds with 200 or an empty set of products', () =>
       it('responds with a status of 200 with products or an empty set', () =>
         request(app)
           .get(`/api/products`)
@@ -28,10 +28,8 @@ describe('/api/products', () => {
         quantity: 1
       })
         .then(product => {
-          // console.log('We made a product', product)
           id = product.id
         })
-      // .catch(console.error)
     })
 
     describe('when a product exists', () =>
@@ -40,7 +38,6 @@ describe('/api/products', () => {
           .get(`/api/products/${id}`)
           .expect(200)
           .then(res => {
-            // console.log("Here's our result", res.body)
             expect(res.body.title).to.be.equal('Test Shoes')
           })
           .catch(console.error)
@@ -68,10 +65,8 @@ describe('/api/products', () => {
         quantity: 1
       })
         .then(product => {
-          // console.log('We made a product', product)
           id = product.id
         })
-      // .catch(console.error)
     })
     it('updates a product', () => {
       request(app)
@@ -89,18 +84,4 @@ describe('/api/products', () => {
     )
   }
   )
-
 })
-// TODOS-tests
-// GET
-// X Find all products
-// X Find products by ID
-
-// POST
-// X Add a product
-
-// UPDATE
-// X admin: update product
-
-// DELETE
-// admins: delete a product
