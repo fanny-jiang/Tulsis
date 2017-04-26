@@ -2,7 +2,6 @@ const db = require('APP/db')
 const User = db.model('users')
 
 const mustBeLoggedIn = (req, res, next) => {
-  console.log('REQ FROM MUSTBELOGGEDIN: ', req.user)
   if (!req.user) {
     return res.status(401).send('You must be logged in')
   }

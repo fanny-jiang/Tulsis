@@ -34,7 +34,6 @@ module.exports = require('express').Router()
   (req, res, next) =>
     Product.findById(req.params.id)
       .then(product => {
-        console.log("IN API ROUTE FOR PRODUCTID: ", product)
         res.json(product)
       })
       .catch(next))

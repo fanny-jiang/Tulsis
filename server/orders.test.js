@@ -11,7 +11,7 @@ describe('/api/orders', () => {
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
   describe('GET /', () =>
-    describe('when there are or are not orders', () =>
+    describe('does not crash when there are no orders', () =>
       it('responds with a status of 200 with orders or an empty set', () =>
         request(app)
           .get(`/api/orders`)

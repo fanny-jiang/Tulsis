@@ -25,10 +25,6 @@ describe('<Login />', () => {
     expect(pw.at(0)).to.have.attr('type').equals('password')
   })
 
-  it('has a login button', () => {
-    const submit = root.find('input[type="submit"]')
-    expect(submit).to.have.length(1)
-  })
 
   describe('when submitted', () => {
     const login = spy()
