@@ -46,16 +46,16 @@ describe('***React tests***', function() {
         productWrapper = shallow(<Product product={productData} />)
       })
 
-      it('includes the product title as an h4', () => {
+      xit('includes the product title as an h4', () => {
 
         // expect(productWrapper.find('div').to.have.html('className: "main-containter"'))
       })
 
-      it('includes the product description as a span', () => {
+      xit('includes the product description as a span', () => {
         // expect(productWrapper.find('span').to.have.html('<p>$8.00</p>'))
       })
 
-      it('is changes with product change', () => {
+      xit('is changes with product change', () => {
         const aDifferentProduct = {
           id: 6,
           title: 'Leather slippers',
