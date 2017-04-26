@@ -34,7 +34,6 @@ class ShippingPaymentFormContainer extends Component {
   }
   handleShipSubmit(evt) {
     evt.preventDefault()
-    // console.log('ORDER-ID FROM SHIP CONTAINER', evt.target.value)
     this.props.addNewSPInfo(this.state, evt.target.value)
     axios.put(`/api/cart/${evt.target.value}/buy`,
       {

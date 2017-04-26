@@ -147,7 +147,6 @@ export default function ShippingPaymentForm(props) {
               <button
               value={cart.id}
               className="complete-order-btn"
-              onClick={handleShipSubmit}
               >Complete Order</button>
             </Link>
           </div>
