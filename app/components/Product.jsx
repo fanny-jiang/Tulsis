@@ -3,13 +3,17 @@ import { Link } from 'react-router'
 import axios from 'axios'
 
 export default function Product(props) {
-
   const product = props.product || [] // product component may render before props have been received
 
   return (
     <div className="main-container">
 
       {/* 'Back to Catalog' link goes here */}
+      <div className="header-link">
+        <Link to={`catalog`}>
+          <img src="/images/back_arrow.png" className="back-arrow" /> Back to Catalog
+        </Link>
+      </div>
 
       {/* Product Detail */}
       <div className="product-detail">
@@ -22,14 +26,12 @@ export default function Product(props) {
       </div>
 
       {/* Add to cart button */}
-      <button onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
+      <button className="add-to-cart-btn" onClick={props.onSubmit} value={product.id}> Add me to your cart! </button>
 
     {/* Reviews go here */}
-    <p> Click <Link to={`catalog`}>here </Link> to continue shopping. </p>
 
     </div>
   )
-
 }
 
 // TO DO
